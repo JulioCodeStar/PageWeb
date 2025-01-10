@@ -16,18 +16,87 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 180 27% 98%;     /* Fondo principal - casi blanco */
+    --foreground: 204 24% 28%;     /* Texto principal - gris azulado oscuro */
+
+    --card: 0 0% 100%;             /* Fondo de tarjetas - blanco */
+    --card-foreground: 204 24% 28%;/* Texto en tarjetas */
+
+    --popover: 0 0% 100%;          /* Fondo de popovers - blanco */
+    --popover-foreground: 204 24% 28%; /* Texto en popovers */
+
+    --primary: 174 62% 40%;        /* Color principal - verde turquesa del logo */
+    --primary-foreground: 0 0% 100%; /* Texto sobre primary - blanco */
+
+    --secondary: 187 31% 65%;      /* Color secundario - azul claro del logo */
+    --secondary-foreground: 204 24% 28%; /* Texto sobre secondary */
+
+    --muted: 180 20% 97%;          /* Fondo atenuado */
+    --muted-foreground: 204 24% 48%; /* Texto atenuado */
+
+    --accent: 174 62% 95%;         /* Color de acento - verde turquesa muy claro */
+    --accent-foreground: 174 62% 30%; /* Texto sobre acento */
+
+    --destructive: 0 84% 60%;      /* Color de error/advertencia - rojo */
+    --destructive-foreground: 0 0% 100%; /* Texto sobre destructive */
+
+    --border: 174 16% 90%;         /* Color de bordes */
+    --input: 174 16% 90%;          /* Bordes de inputs */
+    --ring: 174 62% 40%;           /* Color de focus ring - mismo que primary */
+
+    /* Colores para gráficos si los necesitas */
+    --chart-1: 174 62% 40%;        /* Verde turquesa */
+    --chart-2: 187 31% 65%;        /* Azul claro */
+    --chart-3: 174 62% 30%;        /* Verde turquesa oscuro */
+    --chart-4: 187 31% 55%;        /* Azul medio */
+    --chart-5: 174 62% 50%;        /* Verde turquesa medio */
+  }
+
+  .dark {
+    --background: 204 24% 12%;     /* Fondo oscuro */
+    --foreground: 0 0% 100%;       /* Texto en modo oscuro */
+
+    --card: 204 24% 16%;           /* Fondo de tarjetas oscuro */
+    --card-foreground: 0 0% 100%;  /* Texto en tarjetas oscuro */
+
+    --popover: 204 24% 16%;        /* Fondo de popovers oscuro */
+    --popover-foreground: 0 0% 100%; /* Texto en popovers oscuro */
+
+    --primary: 174 62% 40%;        /* Mantener color principal */
+    --primary-foreground: 0 0% 100%; /* Texto sobre primary */
+
+    --secondary: 187 31% 35%;      /* Secundario más oscuro */
+    --secondary-foreground: 0 0% 100%; /* Texto sobre secondary */
+
+    --muted: 204 24% 20%;          /* Fondo atenuado oscuro */
+    --muted-foreground: 204 24% 70%; /* Texto atenuado oscuro */
+
+    --accent: 174 62% 20%;         /* Acento oscuro */
+    --accent-foreground: 0 0% 100%; /* Texto sobre acento */
+
+    --destructive: 0 84% 60%;      /* Mantener color de error */
+    --destructive-foreground: 0 0% 100%; /* Texto sobre destructive */
+
+    --border: 204 24% 24%;         /* Bordes oscuros */
+    --input: 204 24% 24%;          /* Bordes de inputs oscuros */
+    --ring: 174 62% 40%;           /* Mantener color de ring */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
