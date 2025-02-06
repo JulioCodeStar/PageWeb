@@ -32,7 +32,7 @@ export async function getStaticProps({ params }) {
   const { slug, trabajo } = params;
 
   try {
-    const res = await configAxios.get(`http://localhost:1337/api/jobs?filters[slug][$eq]=/servicios/${slug}/${trabajo}&populate=JobDynamic.img,JobDynamic.Card.img,JobDynamic.List.img,JobDynamic.List.icon,JobDynamic.img_background`)
+    const res = await configAxios.get(`jobs?filters[slug][$eq]=/servicios/${slug}/${trabajo}&populate=JobDynamic.img,JobDynamic.Card.img,JobDynamic.List.img,JobDynamic.List.icon,JobDynamic.img_background`)
     return {
       props: {
         data: res.data.data[0].JobDynamic || null, // Agregamos fallback a null
