@@ -30,7 +30,7 @@ export default function Blog() {
 
   const handlePageChange = async (newPage) => {
     await fetchData(newPage);
-    router.push(`/blog?page=${newPage}`, undefined, { shallow: true });
+    router.push(`blog?page=${newPage}`, undefined, { shallow: true });
   };
 
   if (loading || !currentData?.meta) return (
