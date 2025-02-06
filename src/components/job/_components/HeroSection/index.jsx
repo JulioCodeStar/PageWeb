@@ -2,7 +2,8 @@ import Link from "next/link";
 import { ChevronRight, Home } from 'lucide-react';
 import { motion } from "framer-motion";
 
-export function HeroSection() {
+export function HeroSection({ data }) {
+  
   return (
     <section className="relative h-[400px] md:h-[500px] w-full overflow-hidden">
       {/* Background Image with Parallax */}
@@ -12,7 +13,7 @@ export function HeroSection() {
         transition={{ duration: 1.5 }}
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('https://placehold.co/1920x1080/png')",
+          backgroundImage: `url('${data.img.url}')`,
         }}
       >
         {/* Gradient Overlay */}
@@ -37,7 +38,7 @@ export function HeroSection() {
             <h1 className="mb-6 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
               <span cla
               ssName="text-transparent bg-clip-text bg-gradient-to-r from-device-400 to-device-600">
-                Prótesis Transfemoral
+                {data.job}
               </span>
             </h1>
             
@@ -59,13 +60,13 @@ export function HeroSection() {
               <span className="text-gray-200">Servicios</span>
               <ChevronRight className="h-4 w-4 text-gray-400" />
               <Link 
-                href="/servicios/protesis-de-pierna" 
+                href={data.url_title1}
                 className="flex items-center text-blue-400 hover:text-blue-300 transition-colors duration-200"
               >
-                <span>Prótesis de pierna</span>
+                <span>{data.title1}</span>
               </Link>
               <ChevronRight className="h-4 w-4 text-gray-400" />
-              <span className="text-gray-200">Prótesis Transfemoral</span>
+              <span className="text-gray-200">{data.job}</span>
             </motion.nav>
           </motion.div>
         </div>

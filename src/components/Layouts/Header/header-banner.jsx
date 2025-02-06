@@ -8,50 +8,81 @@ import Link from "next/link";
 
 export const HeaderBanner = () => {
   return (
-    <header className="bg-device-950 h-auto py-2 px-4 md:py-4 xl:px-28">
-      <div className="container w-full mx-auto flex flex-col items-center justify-center text-white gap-1 md:justify-between md:flex-row">
-        {/* Información visible solo en móviles */}
-        <div className="md:hidden flex items-center gap-2">
-          <GoHome />
-          <span className="text-xs">Sedes: Lima, Arequipa y Chiclayo</span>
-        </div>
-
-        {/* Información visible desde md en adelante */}
-        <div className="hidden md:flex gap-8 items-center">
-          <div className="flex items-center gap-2">
-            <IoTimeOutline />
-            <span className="text-sm">
-              Lunes - Viernes 09:00 - 18:00 / Sábado 09:00 - 13:00
-            </span>
-          </div>
-          <div className="flex items-center gap-2">
-            <MdOutlinePhone />
-            <span className="text-sm">Teléfono: (+51) 922578858</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <GoHome />
-            <span className="text-sm">
+    <header className="bg-device-950 w-full">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-2 sm:py-3">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-4">
+          {/* Mobile Info (SM and down) */}
+          <div className="flex items-center gap-2 sm:hidden">
+            <GoHome className="w-3.5 h-3.5 text-white/90" />
+            <span className="text-xs text-white/90">
               Sedes: Lima, Arequipa y Chiclayo
             </span>
           </div>
-        </div>
 
-        {/* Redes sociales visibles desde md en adelante */}
-        <div className="hidden md:flex justify-center items-center gap-6">
-          <Link href="#" target="_blank">
-            <FiFacebook />
-          </Link>
-          <Link href="#" target="_blank">
-            <FaInstagram />
-          </Link>
-          <Link href="#" target="_blank">
-            <FaLinkedinIn />
-          </Link>
-          <Link href="#" target="_blank">
-            <FaYoutube />
-          </Link>
+          {/* Contact Info (SM and up) */}
+          <div className="hidden sm:flex flex-wrap items-center gap-4 md:gap-6 lg:gap-8">
+            {/* Schedule */}
+            <div className="flex items-center gap-2">
+              <IoTimeOutline className="w-4 h-4 text-white/90" />
+              <span className="text-xs md:text-sm text-white/90">
+                Lun - Vie 09:00 - 18:00 / Sáb 09:00 - 13:00
+              </span>
+            </div>
+
+            {/* Phone */}
+            <div className="flex items-center gap-2">
+              <MdOutlinePhone className="w-4 h-4 text-white/90" />
+              <span className="text-xs md:text-sm text-white/90">
+                (+51) 922578858
+              </span>
+            </div>
+
+            {/* Locations */}
+            <div className="flex items-center gap-2">
+              <GoHome className="w-4 h-4 text-white/90" />
+              <span className="text-xs md:text-sm text-white/90">
+                Sedes: Lima, Arequipa y Chiclayo
+              </span>
+            </div>
+          </div>
+
+          {/* Social Media */}
+          <div className="flex justify-center items-center gap-4 sm:gap-5">
+            <Link 
+              href="#" 
+              target="_blank"
+              className="text-white/90 hover:text-white transition-colors"
+              aria-label="Facebook"
+            >
+              <FiFacebook className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            </Link>
+            <Link 
+              href="#" 
+              target="_blank"
+              className="text-white/90 hover:text-white transition-colors"
+              aria-label="Instagram"
+            >
+              <FaInstagram className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            </Link>
+            <Link 
+              href="#" 
+              target="_blank"
+              className="text-white/90 hover:text-white transition-colors"
+              aria-label="LinkedIn"
+            >
+              <FaLinkedinIn className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            </Link>
+            <Link 
+              href="#" 
+              target="_blank"
+              className="text-white/90 hover:text-white transition-colors"
+              aria-label="YouTube"
+            >
+              <FaYoutube className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            </Link>
+          </div>
         </div>
       </div>
     </header>
-  )
+  );
 }

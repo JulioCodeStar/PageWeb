@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Phone, Menu } from "lucide-react";
 import MenuItems from "./menu-Items";
 import Image from "next/image";
+import MobileMenu from "./menu-mobile";
 
 export default function Header() {
   const [isFixed, setIsFixed] = useState(false);
@@ -147,15 +148,7 @@ export default function Header() {
                 </Button>
               </motion.div>
 
-              <motion.button
-                variants={buttonVariants}
-                initial="initial"
-                whileHover="hover"
-                whileTap="tap"
-                className="lg:hidden p-2 rounded-xl hover:bg-gray-100"
-              >
-                <Menu className="w-6 h-6" />
-              </motion.button>
+              <MobileMenu />
             </div>
           </div>
         </div>

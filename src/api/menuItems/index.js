@@ -68,9 +68,9 @@ export const menuData = {
               ]
             },
             {
-              id: 4,
+              id: 6,
               name: "Desarticulado de Cadera",
-              url: "/servicios/protesis-de-pierna/desrticulado-cadera",
+              url: "/servicios/protesis-de-pierna/desarticulado-cadera",
               description: "Prótesis por debajo de la rodilla",
               elaboracion: "Tiempo de elaboración: 45 días",
               resum: "Prótesis diseñada para personas con amputación a nivel de la cadera. Incluye componentes especializados como una articulación de cadera hidráulica y un sistema de rodilla controlado por microprocesador para lograr un movimiento más natural y seguro.",
@@ -90,7 +90,7 @@ export const menuData = {
               ]
             },
             {
-              id: 4,
+              id: 7,
               name: "Prótesis Chopart",
               url: "/servicios/protesis-de-pierna/protesis-chopart",
               description: "Prótesis por debajo de la rodilla",
@@ -112,7 +112,7 @@ export const menuData = {
               ]
             },
             {
-              id: 4,
+              id: 8,
               name: "Prótesis Syme",
               url: "/servicios/protesis-de-pierna/protesis-syme",
               description: "Prótesis por debajo de la rodilla",
@@ -134,7 +134,7 @@ export const menuData = {
               ]
             },
             {
-                id: 4,
+                id: 9,
                 name: "Desarticulado de Rodilla",
                 url: "/servicios/protesis-de-pierna/desarticulado-de-rodilla",
                 description: "Prótesis por encima de la rodilla",
@@ -158,13 +158,13 @@ export const menuData = {
           ],
         },
         {
-          id: 5,
+          id: 10,
           heading: "Prótesis Biónicas",
           slug: "/servicios/protesis-bionicas",
           icon: "🦾",
           links: [
             {
-              id: 7,
+              id: 11,
               name: "Mano Parcial Biónica",
               url: "/servicios/protesis-bionicas/protesis-bionica-de-mano-parcial",
               description: "Tecnología avanzada para movilidad precisa",
@@ -172,25 +172,25 @@ export const menuData = {
           ],
         },
         {
-          id: 7,
+          id: 12,
           heading: "Prótesis Estéticas",
           slug: "/servicios/protesis-esteticas",
           icon: "✨",
           links: [
             {
-              id: 11,
+              id: 13,
               name: "Mano Completa Estética",
               url: "/servicios/protesis-esteticas/mano-completa-estetica",
               description: "Acabado realista y natural",
             },
             {
-              id: 12,
+              id: 14,
               name: "Falange Total",
               url: "/servicios/protesis-esteticas/falange-total",
               description: "Solución personalizada y detallada",
             },
             {
-              id: 13,
+              id: 15,
               name: "Prótesis de Oído",
               url: "/servicios/protesis-esteticas/protesis-de-oido",
               description: "Diseño anatómico preciso",
@@ -201,13 +201,13 @@ export const menuData = {
     },
     {
       __component: "menu.menu-link",
-      id: 7,
+      id: 16,
       title: "Blog",
       url: "/blog",
     },
     {
       __component: "menu.menu-link",
-      id: 8,
+      id: 17,
       title: "Contactos",
       url: "/contactos",
     },

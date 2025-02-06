@@ -2,7 +2,8 @@ import Link from "next/link";
 import { ChevronRight, Home } from 'lucide-react';
 import { motion } from "framer-motion";
 
-export function HeroSection() {
+export function HeroSection({ data }) {
+  
   return (
     <section className="relative h-[400px] md:h-[500px] w-full overflow-hidden">
       {/* Background Image with Parallax */}
@@ -12,7 +13,7 @@ export function HeroSection() {
         transition={{ duration: 1.5 }}
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('https://placehold.co/1920x1080/png')",
+          backgroundImage: `url('${data.img_background.url}')`,
         }}
       >
         {/* Gradient Overlay */}
@@ -37,7 +38,7 @@ export function HeroSection() {
             <h1 className="mb-6 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
               <span cla
               ssName="text-transparent bg-clip-text bg-gradient-to-r from-device-400 to-device-600">
-                Prótesis de Pierna
+                {data.title}
               </span>
             </h1>
             
@@ -58,7 +59,7 @@ export function HeroSection() {
               <ChevronRight className="h-4 w-4 text-gray-400" />
               <span className="text-gray-200">Servicios</span>
               <ChevronRight className="h-4 w-4 text-gray-400" />
-              <span className="text-gray-200">Protesis de Pierna</span>
+              <span className="text-gray-200">{data.title}</span>
             </motion.nav>
           </motion.div>
         </div>

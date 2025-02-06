@@ -30,7 +30,7 @@ const faqs = [
   }
 ];
 
-export function FaqsSection() {
+export function FaqsSection({ data }) {
   const [openItems, setOpenItems] = useState([]);
 
   const toggleItem = (value) => {
@@ -42,7 +42,7 @@ export function FaqsSection() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-white to-blue-50">
+    <section className="py-16 px-4 md:py-24 bg-gradient-to-b from-white to-blue-50">
       <div className="max-w-4xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -50,14 +50,14 @@ export function FaqsSection() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <span className="inline-block text-sm font-medium text-blue-800 sm:text-base lg:text-xl mb-4">
-            Preguntas Frecuentes
+          <span className="inline-block text-xs sm:text-sm lg:text-base font-medium text-blue-800 bg-blue-50 px-3 sm:px-4 py-1.5 rounded-full mb-6">
+            {data.span}
           </span>
-          <h2 className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl mb-6">
-            ¿Cómo podemos ayudarte?
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold leading-tight tracking-tight text-device-900 mb-6">
+            {data.title}
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Encuentra respuestas a las preguntas más comunes sobre nuestros servicios y productos
+            {data.paragraph}
           </p>
         </motion.div>
 
@@ -72,7 +72,7 @@ export function FaqsSection() {
             onValueChange={setOpenItems}
             className="space-y-4"
           >
-            {faqs.map((faq, index) => (
+            {data.FAQS.map((faq, index) => (
               <AccordionItem
                 key={index}
                 value={`item-${index}`}

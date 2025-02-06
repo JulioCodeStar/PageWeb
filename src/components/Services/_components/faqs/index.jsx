@@ -7,30 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const faqs = [
-  {
-    question: "¿Cuánto tiempo toma adaptarse a una prótesis?",
-    answer: "El tiempo de adaptación varía según cada persona y el tipo de prótesis. Generalmente, el proceso inicial toma entre 4-6 semanas, durante las cuales proporcionamos apoyo continuo y sesiones de rehabilitación para asegurar una adaptación óptima."
-  },
-  {
-    question: "¿Las prótesis están cubiertas por seguros médicos?",
-    answer: "Sí, muchos seguros médicos cubren las prótesis. Trabajamos con las principales aseguradoras y podemos ayudarte a gestionar la cobertura de tu seguro. También ofrecemos opciones de financiamiento para hacer las prótesis más accesibles."
-  },
-  {
-    question: "¿Qué mantenimiento requiere una prótesis?",
-    answer: "Recomendamos revisiones regulares cada 6 meses. El mantenimiento diario incluye limpieza básica y revisión de ajuste. Proporcionamos instrucciones detalladas y soporte continuo para el cuidado adecuado de tu prótesis."
-  },
-  {
-    question: "¿Puedo hacer deporte con una prótesis?",
-    answer: "Absolutamente. Diseñamos prótesis específicas para diferentes niveles de actividad física. Muchos de nuestros pacientes practican deportes regularmente. La clave está en elegir la prótesis adecuada para tus necesidades específicas."
-  },
-  {
-    question: "¿Qué durabilidad tiene una prótesis?",
-    answer: "La durabilidad típica es de 3-5 años, dependiendo del uso y mantenimiento. Los componentes pueden requerir reemplazos periódicos. Realizamos evaluaciones regulares para asegurar el óptimo funcionamiento de tu prótesis."
-  }
-];
-
-export function FaqsSection() {
+export function FaqsSection({ data }) {
   const [openItems, setOpenItems] = useState([]);
 
   const toggleItem = (value) => {
@@ -51,13 +28,13 @@ export function FaqsSection() {
           className="text-center mb-12"
         >
           <span className="inline-block text-sm font-medium text-blue-800 sm:text-base lg:text-xl mb-4">
-            Preguntas Frecuentes
+            {data.span}
           </span>
           <h2 className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl mb-6">
-            ¿Cómo podemos ayudarte?
+            {data.title}
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Encuentra respuestas a las preguntas más comunes sobre nuestros servicios y productos
+            {data.paragraph}
           </p>
         </motion.div>
 
@@ -72,7 +49,7 @@ export function FaqsSection() {
             onValueChange={setOpenItems}
             className="space-y-4"
           >
-            {faqs.map((faq, index) => (
+            {data.FAQS.map((faq, index) => (
               <AccordionItem
                 key={index}
                 value={`item-${index}`}

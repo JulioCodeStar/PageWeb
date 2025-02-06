@@ -2,12 +2,20 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["placehold.co"],
+    domains: ["placehold.co", "res.cloudinary.com", "picsum.photos"],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "placehold.co",
       },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+      }
     ],
   },
 };

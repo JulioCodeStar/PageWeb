@@ -1,51 +1,6 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-const processes = [
-  {
-    count: "01",
-    title: "Apoyo Emocional",
-    description: "Evaluación inicial a cargo del área de apoyo emocional.",
-    imageUrl: "https://placehold.co/600x400/png",
-    icon: "🫂"
-  },
-  {
-    count: "02",
-    title: "Rehabilitación Pre y Post Protésica",
-    description: "Control del dolor y la inflamación del muñón antes y después de la prótesis",
-    imageUrl: "https://placehold.co/600x400/png",
-    icon: "🏥"
-  },
-  {
-    count: "03",
-    title: "Toma de Medidas",
-    description: "Toma de medidas con vendas y materiales especiales.",
-    imageUrl: "https://placehold.co/600x400/png",
-    icon: "📏"
-  },
-  {
-    count: "04",
-    title: "Prueba de Encaje",
-    description: "Se ubica el muñón de forma exacta dentro del encaje",
-    imageUrl: "https://placehold.co/600x400/png",
-    icon: "🔧"
-  },
-  {
-    count: "05",
-    title: "Prueba de Marcha",
-    description: "Uso de la prótesis con encaje de prueba de 2 semanas",
-    imageUrl: "https://placehold.co/600x400/png",
-    icon: "👣"
-  },
-  {
-    count: "06",
-    title: "Socket Final",
-    description: "Cambio del preencaje y entrega del encaje final.",
-    imageUrl: "https://placehold.co/600x400/png",
-    icon: "✨"
-  }
-];
-
 const container = {
   hidden: { opacity: 0 },
   show: {
@@ -61,67 +16,82 @@ const item = {
   show: { opacity: 1, y: 0 }
 };
 
-export function ProcesosSection() {
+export function ProcesosSection({ data }) {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-gray-50 to-white">
-      <div className="container mx-auto">
+    <section className="relative bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
+        {/* Header */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center space-y-4 mb-8 sm:mb-12 lg:mb-16"
         >
-          <span className="inline-block text-sm font-medium text-blue-800 sm:text-base lg:text-xl">
-            Nuestros Procesos de Atención
+          <span className="inline-block text-xs sm:text-sm lg:text-base font-medium text-blue-800 bg-blue-50 px-3 sm:px-4 py-1.5 rounded-full">
+            {data.span}
           </span>
-          <h2 className="text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
-            Creamos tu prótesis de pierna siguiendo un proceso meticuloso y personalizado
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight tracking-tight">
+            {data.title}
           </h2>
         </motion.div>
 
+        {/* Process Cards Grid */}
         <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
-          {processes.map((process, index) => (
+          {data.Card.map((process) => (
             <motion.div
-              key={index}
+              key={process.id}
               variants={item}
-              className="group relative bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 p-6"
+              className="group relative bg-white rounded-xl sm:rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 p-4 sm:p-6"
             >
-              <div className="absolute top-6 right-6 text-6xl opacity-10 group-hover:opacity-20 transition-opacity duration-300">
-                {process.icon}
+              {/* Background Icon */}
+              <div className="absolute top-4 sm:top-6 right-4 sm:right-6 text-4xl sm:text-6xl opacity-10 group-hover:opacity-20 transition-opacity duration-300">
+                <Image 
+                  priority 
+                  src={process.icon.url}
+                  alt={process.title}
+                  width={80}
+                  height={60}
+                />
               </div>
               
-              <div className="relative space-y-6">
-                <span className="text-5xl font-bold text-blue-600/20 group-hover:text-blue-600/30 transition-colors duration-300">
+              {/* Content Container */}
+              <div className="relative space-y-4 sm:space-y-6">
+                {/* Number */}
+                <span className="text-4xl sm:text-5xl font-bold text-blue-600/20 group-hover:text-blue-600/30 transition-colors duration-300">
                   {process.count}
                 </span>
 
-                <div className="relative overflow-hidden rounded-xl">
+                {/* Image */}
+                <div className="relative aspect-[3/2] overflow-hidden rounded-lg sm:rounded-xl">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
                   <Image
-                    src={process.imageUrl}
+                    priority 
+                    src={process.img.url}
                     alt={process.title}
-                    width={600}
-                    height={400}
-                    className="w-full h-48 object-cover transform transition-transform duration-300 group-hover:scale-105"
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transform transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
 
-                <div className="space-y-3">
-                  <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+                {/* Text Content */}
+                <div className="space-y-2 sm:space-y-3">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
                     {process.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                     {process.description}
                   </p>
                 </div>
 
-                <div className="h-1 w-20 bg-blue-600/20 group-hover:w-full transition-all duration-500" />
+                {/* Progress Bar */}
+                <div className="h-1 w-16 sm:w-20 bg-blue-600/20 group-hover:w-full transition-all duration-500" />
               </div>
             </motion.div>
           ))}

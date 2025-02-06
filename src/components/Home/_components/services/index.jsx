@@ -1,93 +1,120 @@
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { FaArrowRight } from "react-icons/fa"; // Importamos el ícono de flecha
+import { motion, useInView } from "framer-motion";
+import { FaArrowRight } from "react-icons/fa";
+import { useRef } from "react";
 
-const services = [
-  {
-    title: "Prótesis de Miembro Inferior",
-    description:
-      "Fabricación de prótesis personalizadas con alta tecnología para extremidades inferiores, garantizando máxima comodidad y movilidad en tu día a día. Cada prótesis se adapta perfectamente a tu anatomía y estilo de vida.",
-    image: "https://placehold.co/600x500/jpg",
-    icon: "📄",
-    link: "/servicios/miembro-inferior",
-  },
-  {
-    title: "Prótesis de Miembro Superior",
-    description:
-      "Desarrollamos prótesis de brazos y manos con tecnología avanzada, diseñadas para recuperar la funcionalidad y naturalidad de tus movimientos. Cada prótesis está personalizada para tu máximo confort.",
-    image: "https://placehold.co/600x500/jpg",
-    icon: "💪",
-    link: "/servicios/miembro-superior",
-  },
-  {
-    title: "Prótesis Estéticas",
-    description:
-      "Creamos prótesis estéticas con acabado totalmente natural, reproduciendo fielmente el color, textura y detalles de tu piel. Una solución personalizada que combina belleza y comodidad.",
-    image: "https://placehold.co/600x500/jpg",
-    icon: "🌟",
-    link: "/servicios/esteticas",
-  },
-];
 
-export function Services() {
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.2
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut"
+    }
+  }
+};
+
+export function Services({ data }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
+
   return (
-    <section className="bg-white py-24">
-      <div className="container mx-auto">
-        <div className="flex flex-col justify-center items-center gap-3 pb-14">
-          <h5 className="inline-block text-sm font-medium text-blue-800 sm:text-base lg:text-xl">
-            Nuestros Servicios
-          </h5>
-          <h2 className="text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
-            Te ofrecemos una prótesis a tu medida
-          </h2>
-        </div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => (
-            <motion.div
-              key={service.title}
-              className="group relative h-[300px] overflow-hidden rounded-xl bg-gray-100"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
+    <section className="bg-gradient-to-b from-white via-blue-50 to-white overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
+        <motion.div 
+          ref={ref}
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="space-y-8 sm:space-y-12 lg:space-y-16"
+        >
+          {/* Header */}
+          <div className="flex flex-col items-center text-center space-y-4">
+            <motion.span 
+              variants={itemVariants}
+              className="inline-block text-xs sm:text-sm lg:text-base font-medium text-blue-800 bg-blue-50 px-3 sm:px-4 py-1.5 rounded-full"
             >
-              {/* Imagen de fondo */}
-              <div className="absolute inset-0">
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  fill
-                  className="object-cover transition-opacity duration-300 group-hover:opacity-20"
-                />
-              </div>
+              {data.span}
+            </motion.span>
+            <motion.h2 
+              variants={itemVariants}
+              className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold leading-tight tracking-tight text-device-900 max-w-3xl mx-auto"
+            >
+              {data.title}
+            </motion.h2>
+          </div>
 
-              {/* Contenido */}
-              <div className="relative flex h-full flex-col justify-between p-6">
-                {/* Contenido principal */}
-                <div>
-                  <div className="mb-4 text-4xl">{service.icon}</div>
-                  <h3 className="mb-2 text-xl font-bold text-gray-900">
-                    {service.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-gray-600 opacity-0 transition-all duration-300 group-hover:opacity-100">
-                    {service.description}
-                  </p>
+          {/* Services Grid */}
+          <motion.div 
+            variants={itemVariants}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+          >
+            {data.Card.map((sec) => (
+              <motion.div
+                key={sec.id}
+                className="group relative aspect-[4/3] sm:aspect-[3/4] lg:aspect-[4/3] overflow-hidden rounded-2xl bg-white shadow-xl shadow-gray-200/50"
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Background Image */}
+                <div className="absolute inset-0">
+                  <Image
+                    src={sec.img_background.url}
+                    alt={sec.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-all duration-500 group-hover:scale-110 group-hover:opacity-20"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-90" />
                 </div>
 
-                {/* Botón Ver más */}
-                <motion.a
-                  href={service.link}
-                  className="mt-4 inline-flex items-center text-sm font-medium text-primary opacity-0 transition-all duration-300 group-hover:opacity-100 cursor-pointer"
-                  whileHover={{ x: 5 }}
-                >
-                  Ver más
-                  <FaArrowRight className="ml-2 h-4 w-4" />
-                </motion.a>
+                {/* Content */}
+                <div className="relative h-full p-4 sm:p-6 flex flex-col justify-between">
+                  <div className="space-y-2">
+                    <div className="text-3xl sm:text-4xl transform transition-transform duration-300 group-hover:scale-110">
+                      <Image
+                        src={sec.icon.url}
+                        alt={sec.title}
+                        width={40}
+                        height={40}
+                        priority
+                      />
+                    </div>
+                    <h3 className="text-lg sm:text-xl font-bold text-white">
+                      {sec.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-gray-100 opacity-0 transform translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 line-clamp-4 sm:line-clamp-none">
+                      {sec.description}
+                    </p>
+                  </div>
 
-                {/* Overlay gradiente */}
-                <div className="absolute bottom-0 left-0 h-1/2 w-full bg-gradient-to-t from-white/90 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                  <motion.a
+                    href={sec.url.url}
+                    className="inline-flex items-center text-xs sm:text-sm font-medium text-device-50 opacity-0 transform translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 hover:text-white mt-2"
+                    whileHover={{ x: 5 }}
+                  >
+                    {sec.url.title}
+                    <FaArrowRight className="ml-2 h-3 w-3 sm:h-4 sm:w-4" />
+                  </motion.a>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

@@ -12,7 +12,7 @@ export function HeroBannerSection() {
         transition={{ duration: 1.5 }}
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('https://placehold.co/1920x1080/png')",
+          backgroundImage: `url('/img/blog-grid.jpg')`,
         }}
       >
         {/* Gradient Overlay */}

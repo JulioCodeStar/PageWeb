@@ -1,103 +1,137 @@
 /* eslint-disable @next/next/no-img-element */
 import { FaLaptopMedical } from "react-icons/fa";
 import { Card, CardFooter, CardHeader } from "@/components/ui/card";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import Image from "next/image";
 
-const features = [
-  {
-    icon: <FaLaptopMedical />,
-    title: "Experiencia Comprobada",
-    description: "Más de 500 pacientes satisfechos con nuestras prótesis personalizadas de alta calidad.",
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.2,
+    },
   },
-  {
-    icon: <FaLaptopMedical />,
-    title: "Tecnología Avanzada",
-    description: "Utilizamos las últimas innovaciones en prótesis y sistemas de adaptación para tu máxima comodidad.",
-  },
-  {
-    icon: <FaLaptopMedical />,
-    title: "Atención Personalizada",
-    description: "Seguimiento completo y adaptación perfecta de tu prótesis por nuestro equipo especializado.",
-  },
-  {
-    icon: <FaLaptopMedical />,
-    title: "Facilidad de Pago",
-    description: "Sistema de pago conveniente: 50% al iniciar y 50% al entregar tu prótesis personalizada.",
-  },
-];
+};
 
-const stats = [
-  { value: "10", label: "Especialistas" },
-  { value: "500", label: "Pacientes Felices" },
-  { value: "3", label: "Sedes a nivel Nacional" },
-  { value: "12", label: "Aliados que confían" },
-];
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
 
-export function Choose() {
+export function Choose({ data }) {
+  const mainRef = useRef(null);
+  const statsRef = useRef(null);
+  const isMainInView = useInView(mainRef, { once: true, amount: 0.3 });
+  const isStatsInView = useInView(statsRef, { once: true, amount: 0.3 });
+
   return (
     <>
-      <section className="relative w-full overflow-hidden bg-device-950 py-16 sm:py-20 lg:py-24">
-        {/* Imágenes de fondo */}
-        <div className="absolute right-0 top-0 hidden h-full w-[calc(50%-224px)] bg-cover bg-center bg-no-repeat lg:block" 
-             style={{ backgroundImage: "url('https://placehold.co/736x821/svg')" }} />
-        <div className="absolute bottom-0 left-0 h-[570px] w-[490px] bg-[url('/img/shape12.png')] bg-no-repeat opacity-70" />
+      <section className="relative w-full overflow-hidden bg-device-950 px-4 py-16 sm:py-20 lg:py-24">
+        {/* Background images */}
+        <div
+          className="absolute right-0 top-0 hidden h-full w-[calc(50%-224px)] bg-cover bg-center bg-no-repeat lg:block"
+          style={{ backgroundImage: `url('${data.img_background.url}')` }}
+        />
+        <motion.div
+          className="absolute bottom-0 left-0 h-[570px] w-[490px] bg-[url('/img/shape12.png')] bg-no-repeat opacity-20"
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 0.2, x: 0 }}
+          transition={{ duration: 1 }}
+        />
 
-        <div className="container relative mx-auto">
-          <div className="lg:w-2/3">
-            {/* Encabezado */}
-            <div className="mb-12">
-              <span className="mb-4 block text-xl text-white sm:text-2xl">
-                ¿Por qué elegirnos?
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            ref={mainRef}
+            variants={containerVariants}
+            initial="hidden"
+            animate={isMainInView ? "visible" : "hidden"}
+            className="mx-auto max-w-3xl lg:mx-0 lg:max-w-[60%]"
+          >
+            {/* Header */}
+            <motion.div
+              variants={itemVariants}
+              className="mb-12 text-center lg:text-left"
+            >
+              <span className="inline-block rounded-full bg-white/10 px-4 py-1 text-lg text-white backdrop-blur-sm sm:text-xl lg:text-2xl">
+                {data.span}
               </span>
-              <h2 className="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
-                Elige la mejor opción para tu bienestar con tu prótesis
+              <h2 className="mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
+                {data.title}
               </h2>
-            </div>
+            </motion.div>
 
-            {/* Grid de características */}
+            {/* Features grid */}
             <div className="grid gap-8 sm:grid-cols-2">
-              {features.map((feature) => (
-                <div
+              {data.List.map((feature) => (
+                <motion.div
                   key={feature.title}
-                  className="relative border-b border-white/20 pb-8 pl-24 sm:pl-28"
+                  variants={itemVariants}
+                  className="group relative border-b border-white/20 pb-8 pl-20 sm:pl-24"
                 >
-                  <div className="absolute left-0 top-0 text-6xl text-white transition-all sm:text-7xl">
-                    {feature.icon}
+                  <div className="absolute left-0 top-0 text-4xl text-white transition-transform duration-300 group-hover:scale-110 sm:text-6xl lg:text-7xl">
+                    <Image
+                      src={feature.img.url}
+                      alt={feature.title}
+                      width={72}
+                      height={72}
+                      priority
+                    />
                   </div>
-                  <h3 className="mb-3 text-xl font-semibold text-white sm:text-2xl">
+                  <h3 className="mb-3 text-lg font-semibold text-white sm:text-xl lg:text-2xl">
                     {feature.title}
                   </h3>
-                  <p className="text-base text-white/90">
+                  <p className="text-sm text-white/90 sm:text-base">
                     {feature.description}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Sección de estadísticas */}
+      {/* Stats section */}
       <section className="relative -mt-16 px-4">
-        <div className="container mx-auto">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {stats.map((stat) => (
-              <Card
-                key={stat.value}
-                className="rounded-xl bg-white p-6 shadow-lg transition-shadow hover:shadow-xl"
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            ref={statsRef}
+            variants={containerVariants}
+            initial="hidden"
+            animate={isStatsInView ? "visible" : "hidden"}
+            className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4"
+          >
+            {data.Card.map((stat) => (
+              <motion.div
+                key={stat.id}
+                variants={itemVariants}
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.2 }}
               >
-                <CardHeader className="pb-4">
-                  <span className="text-4xl font-medium text-primary sm:text-5xl">
-                    <p >{stat.value} </p>
-                  </span>
-                </CardHeader>
-                <CardFooter className="pt-0">
-                  <span className="rounded-xl bg-primary/10 px-6 py-2 text-sm font-medium text-primary sm:text-base">
-                    {stat.label}
-                  </span>
-                </CardFooter>
-              </Card>
+                <Card className="group h-full overflow-hidden rounded-xl bg-white p-4 text-center shadow-lg transition-all duration-300 hover:shadow-xl sm:p-6">
+                  <CardHeader className="pb-2 sm:pb-4">
+                    <span className="text-3xl font-bold text-device-800 sm:text-4xl lg:text-5xl">
+                      {stat.count}
+                    </span>
+                  </CardHeader>
+                  <CardFooter className="pt-0">
+                    <span className="w-full rounded-xl bg-device-50 px-3 py-2 text-xs font-medium text-device-900 transition-colors duration-300 sm:px-6 sm:text-sm lg:text-base">
+                      {stat.title}
+                    </span>
+                  </CardFooter>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
     </>

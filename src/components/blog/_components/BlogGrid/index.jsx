@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Calendar, User } from "lucide-react";
@@ -12,79 +11,6 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-
-const blogPosts = [
-  {
-    id: 1,
-    title: "Avances en Prótesis Biónicas",
-    excerpt:
-      "Descubre los últimos avances en tecnología de prótesis y cómo están cambiando vidas.",
-    author: "KYP Bioingeniería",
-    date: "12 Dec 2024",
-    image: "https://placehold.co/920x613/png",
-    slug: "avances-protesis-bionicas",
-  },
-  {
-    id: 2,
-    title: "Rehabilitación Post Protésica",
-    excerpt:
-      "Guía completa sobre el proceso de rehabilitación después de recibir una prótesis.",
-    author: "KYP Bioingeniería",
-    date: "10 Dec 2024",
-    image: "https://placehold.co/920x613/png",
-    slug: "rehabilitacion-post-protesica",
-  },
-  {
-    id: 3,
-    title: "Innovación en Materiales Protésicos",
-    excerpt:
-      "Nuevos materiales que están revolucionando la industria de las prótesis.",
-    author: "KYP Bioingeniería",
-    date: "8 Dec 2024",
-    image: "https://placehold.co/920x613/png",
-    slug: "innovacion-materiales-protesicos",
-  },
-  {
-    id: 4,
-    title: "Innovación en Materiales Protésicos",
-    excerpt:
-      "Nuevos materiales que están revolucionando la industria de las prótesis.",
-    author: "KYP Bioingeniería",
-    date: "8 Dec 2024",
-    image: "https://placehold.co/920x613/png",
-    slug: "innovacion-materiales-protesicos",
-  },
-  {
-    id: 5,
-    title: "Innovación en Materiales Protésicos",
-    excerpt:
-      "Nuevos materiales que están revolucionando la industria de las prótesis.",
-    author: "KYP Bioingeniería",
-    date: "8 Dec 2024",
-    image: "https://placehold.co/920x613/png",
-    slug: "innovacion-materiales-protesicos",
-  },
-  {
-    id: 6,
-    title: "Innovación en Materiales Protésicos",
-    excerpt:
-      "Nuevos materiales que están revolucionando la industria de las prótesis.",
-    author: "KYP Bioingeniería",
-    date: "8 Dec 2024",
-    image: "https://placehold.co/920x613/png",
-    slug: "innovacion-materiales-protesicos",
-  },
-  {
-    id: 7,
-    title: "Innovación en Materiales Protésicos",
-    excerpt:
-      "Nuevos materiales que están revolucionando la industria de las prótesis.",
-    author: "KYP Bioingeniería",
-    date: "8 Dec 2024",
-    image: "https://placehold.co/920x613/png",
-    slug: "innovacion-materiales-protesicos",
-  },
-];
 
 const container = {
   hidden: { opacity: 0 },
@@ -101,136 +27,133 @@ const item = {
   show: { opacity: 1, y: 0 },
 };
 
-export function BlogGrid() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 6;
-  const totalPages = Math.ceil(blogPosts.length / postsPerPage);
-
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = blogPosts.slice(indexOfFirstPost, indexOfLastPost);
-
-  const handlePageChange = (page) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+const getImageUrl = (feature_img) => {
+  if (Array.isArray(feature_img) && feature_img.length > 0) {
+    const img = feature_img[0];
+    if (img.formats && img.formats.small) {
+      return img.formats.small.url;
     }
-  };
+    return img.url;
+  }
+  return "https://placehold.co/900/png"; // Fallback to a placeholder image
+};
+
+export function BlogGrid({ data, onPageChange }) {
+  const { pagination } = data.meta;
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50">
-      <div className="container mx-auto">
+    <section className="relative bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
         <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
-          {currentPosts.map((post) => (
+          {data.data.map((post) => (
             <motion.article
               key={post.id}
               variants={item}
-              className="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300"
+              className="group bg-white rounded-xl sm:rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
             >
-              <div className="relative overflow-hidden rounded-t-2xl">
+              {/* Image Container */}
+              <div className="relative aspect-[16/10] overflow-hidden rounded-t-xl sm:rounded-t-2xl">
                 <Image
-                  src={post.image}
+                  src={getImageUrl(post.feature_img)}
                   alt={post.title}
-                  width={920}
-                  height={613}
-                  className="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-105"
+                  fill
+                  className="object-cover transform transition-transform duration-500 group-hover:scale-105"
                 />
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
 
-              <div className="p-6 space-y-4">
-                <div className="flex items-center space-x-4 text-sm text-gray-600">
+              {/* Content */}
+              <div className="flex flex-col flex-grow p-4 sm:p-6 space-y-3 sm:space-y-4">
+                {/* Meta Info */}
+                <div className="flex items-center space-x-3 sm:space-x-4 text-xs sm:text-sm text-gray-600">
                   <span className="flex items-center">
-                    <User className="w-4 h-4 mr-1" />
+                    <User className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1" />
                     {post.author}
                   </span>
                   <span className="w-1 h-1 rounded-full bg-gray-300" />
                   <span className="flex items-center">
-                    <Calendar className="w-4 h-4 mr-1" />
+                    <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1" />
                     {post.date}
                   </span>
                 </div>
 
-                <h2 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
-                  <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                {/* Title */}
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+                  <Link href={`${post.slug}`} className="hover:underline">
+                    {post.title}
+                  </Link>
                 </h2>
 
-                <p className="text-gray-600 leading-relaxed">{post.excerpt}</p>
+                {/* Excerpt */}
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed line-clamp-3 flex-grow">
+                  {post.excert}
+                </p>
 
+                {/* CTA */}
                 <Link
-                  href={`/blog/${post.slug}`}
-                  className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300"
+                  href={`${post.slug}`}
+                  className="inline-flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300 group/link"
                 >
                   Leer más
-                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-300 group-hover/link:translate-x-1" />
                 </Link>
               </div>
             </motion.article>
           ))}
         </motion.div>
 
-        {/* Aquí puedes agregar la paginación cuando la implementes */}
-        {totalPages > 1 && (
-          <Pagination className="mt-12">
+        <div className="mt-12">
+          <Pagination>
             <PaginationContent>
               <PaginationItem>
-                <PaginationPrevious
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  className={`${
-                    currentPage === 1
-                      ? "pointer-events-none opacity-50"
-                      : "cursor-pointer"
-                  }`}
-                />
+                <button
+                  onClick={() =>
+                    pagination.page > 1 && onPageChange(pagination.page - 1)
+                  }
+                  disabled={pagination.page <= 1}
+                  className={`${pagination.page <= 1 ? "opacity-50" : ""}`}
+                >
+                  <PaginationPrevious />
+                </button>
               </PaginationItem>
 
-              {[...Array(totalPages)].map((_, i) => {
-                const pageNumber = i + 1;
-                if (
-                  pageNumber === 1 ||
-                  pageNumber === totalPages ||
-                  (pageNumber >= currentPage - 1 &&
-                    pageNumber <= currentPage + 1)
-                ) {
-                  return (
-                    <PaginationItem key={pageNumber}>
-                      <PaginationLink
-                        onClick={() => handlePageChange(pageNumber)}
-                        isActive={currentPage === pageNumber}
-                      >
-                        {pageNumber}
-                      </PaginationLink>
-                    </PaginationItem>
-                  );
-                }
-                if (
-                  pageNumber === currentPage - 2 ||
-                  pageNumber === currentPage + 2
-                ) {
-                  return <PaginationEllipsis key={pageNumber} />;
-                }
-                return null;
-              })}
+              {Array.from({ length: pagination.pageCount }).map((_, i) => (
+                <PaginationItem key={i}>
+                  <button
+                    onClick={() => onPageChange(i + 1)}
+                    className={`${
+                      i + 1 === pagination.page ? "bg-blue-500 text-white" : ""
+                    } px-3 py-2 rounded`}
+                  >
+                    {i + 1}
+                  </button>
+                </PaginationItem>
+              ))}
 
               <PaginationItem>
-                <PaginationNext
-                  onClick={() => handlePageChange(currentPage + 1)}
+                <button
+                  onClick={() =>
+                    pagination.page < pagination.pageCount &&
+                    onPageChange(pagination.page + 1)
+                  }
+                  disabled={pagination.page >= pagination.pageCount}
                   className={`${
-                    currentPage === totalPages
-                      ? "pointer-events-none opacity-50"
-                      : "cursor-pointer"
+                    pagination.page >= pagination.pageCount ? "opacity-50" : ""
                   }`}
-                />
+                >
+                  <PaginationNext />
+                </button>
               </PaginationItem>
             </PaginationContent>
           </Pagination>
-        )}
+        </div>
       </div>
     </section>
   );
