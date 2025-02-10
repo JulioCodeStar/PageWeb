@@ -27,7 +27,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params: { slug } }) {
 
   try {
-    const res = await configAxios.get(`services?filters[slug][$eq]=/servicios/${slug}&populate=SectionDynamic.img_background,SectionDynamic.img,SectionDynamic.List,SectionDynamic.Card.img,SectionDynamic.Card.icon,SectionDynamic.Producto.img,SectionDynamic.List.icon,SectionDynamic.FAQS`)
+    const res = await configAxios.get(`services?filters[slug][$eq]=/servicios/${slug}&populate=SectionDynamic.img_background,SectionDynamic.img,SectionDynamic.List,SectionDynamic.Card.img,SectionDynamic.Card.icon,SectionDynamic.Producto.img,SectionDynamic.List.icon,SectionDynamic.FAQS,SectionDynamic.Producto.List`)
     return {
       props: {
         data: res.data.data[0].SectionDynamic || null, // Agregamos fallback a null

@@ -27,6 +27,13 @@ export function HeaderSection({ data }) {
     },
   };
 
+  const enviarWhatsapp = (text) => {
+    const numero = "51922578858";
+    const mensaje = `👋Hola, estoy interesado *${text}*🛍️. ¿Podrías darme más detalles?🤔`;
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, "_blank");
+  };
+
   return (
     <section className="relative min-h-screen w-full bg-gradient-to-b from-white to-blue-50/30 overflow-hidden">
       {/* Background Image */}
@@ -66,6 +73,7 @@ export function HeaderSection({ data }) {
               <motion.div className="w-full sm:w-auto text-center">
                 {data.Button.map((buttontext) => (
                   <Button
+                    onClick={() => enviarWhatsapp("(Escriba el Servicio)")}
                     key={buttontext.id}
                     className="bg-device-600 hover:bg-device-700 text-white px-6 py-4 sm:py-6 rounded-xl w-full sm:w-auto"
                   >

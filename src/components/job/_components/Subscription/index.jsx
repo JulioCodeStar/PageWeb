@@ -2,8 +2,24 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight, Phone } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from 'next/router';
 
 export function Subscription({ data }) {
+
+  const path = useRouter();
+  
+  
+  const handleCallNow = () => {
+    window.location.href = "tel:+51922578858";
+  };
+
+  const enviarWhatsapp = (text) => {
+    const numero = "51922578858";
+    const mensaje = `👋Hola, estoy interesado *${text}*🛍️. ¿Podrías darme más detalles?🤔`;
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, "_blank");
+  };
+
   return (
     <section className="relative overflow-hidden">
       {/* Background Gradient */}
@@ -82,6 +98,7 @@ export function Subscription({ data }) {
                   className="flex flex-col gap-3 sm:gap-4"
                 >
                   <Button 
+                    onClick={() => handleCallNow()}
                     size="lg"
                     className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 sm:py-6 rounded-xl text-sm sm:text-base lg:text-lg font-medium"
                   >
@@ -89,6 +106,7 @@ export function Subscription({ data }) {
                     <Phone className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
                   <Button 
+                    onClick={() => enviarWhatsapp(path.query.trabajo)}
                     variant="outline"
                     size="lg"
                     className="w-full py-4 sm:py-6 rounded-xl text-sm sm:text-base lg:text-lg font-medium"

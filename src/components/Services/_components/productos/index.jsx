@@ -3,8 +3,14 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function ProstheticInterface({ data }) {
+
+  console.log(data);
+  
+
   const [activeCard, setActiveCard] = useState(0);
   return (
     <section className="relative bg-gradient-to-b from-gray-50 to-white overflow-hidden">
@@ -28,9 +34,9 @@ export function ProstheticInterface({ data }) {
         </motion.div>
 
         {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-[350px,1fr] gap-6 sm:gap-8">
+        <div className="grid lg:grid-cols-[370px,1fr] gap-6 sm:gap-8">
           {/* Navigation Cards */}
-          <div className="relative h-[400px] sm:h-[500px] lg:h-[600px] overflow-y-auto custom-scrollbar px-2 sm:px-4 py-2">
+          <ScrollArea className="relative h-[400px] sm:h-[500px] lg:h-[600px] px-2 sm:px-4 py-2">
             {data.Producto.map((item, index) => (
               <motion.div
                 key={item.id}
@@ -56,7 +62,7 @@ export function ProstheticInterface({ data }) {
                 </Card>
               </motion.div>
             ))}
-          </div>
+          </ScrollArea>
 
           {/* Detail View */}
           <AnimatePresence mode="wait">
@@ -109,9 +115,10 @@ export function ProstheticInterface({ data }) {
 
                 <Button
                   size="lg"
-                  className="w-full sm:w-auto text-sm sm:text-base"
+                  className="w-full rounded-xl sm:w-auto text-sm sm:text-base"
+                  asChild
                 >
-                  Ver más
+                  <Link href={data.Producto[activeCard].url}>Ver más</Link>
                 </Button>
               </div>
             </motion.div>

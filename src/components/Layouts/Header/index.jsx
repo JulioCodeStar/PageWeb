@@ -81,6 +81,13 @@ export default function Header() {
     tap: { scale: 0.95 },
   };
 
+  const enviarWhatsapp = (text) => {
+    const numero = "51922578858";
+    const mensaje = `👋Hola, estoy interesado *${text}*🛍️. ¿Podrías darme más detalles?🤔`;
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, "_blank");
+  };
+
   return (
     <motion.section
       initial="visible"
@@ -142,7 +149,10 @@ export default function Header() {
                 whileHover="hover"
                 whileTap="tap"
               >
-                <Button className="bg-device-600 hover:bg-device-700 text-white px-6 py-6 rounded-xl flex items-center gap-2">
+                <Button
+                  onClick={() => enviarWhatsapp('(escriba el servicio)')}
+                  className="bg-device-600 hover:bg-device-700 text-white px-6 py-6 rounded-xl flex items-center gap-2"
+                >
                   <Phone className="w-4 h-4" />
                   <span className="hidden sm:inline">Contáctenos</span>
                 </Button>

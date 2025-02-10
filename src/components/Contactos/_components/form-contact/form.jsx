@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useToast } from "@/hooks/use-toast"
 import { useForm } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -20,9 +21,6 @@ const formSchema = z.object({
   name: z.string().min(2, {
     message: "El nombre debe tener al menos 2 caracteres",
   }),
-  email: z.string().email({
-    message: "Ingresa un correo electrónico válido",
-  }),
   phone: z.string().regex(/^[0-9]{9}$/, {
     message: "Ingresa un número de teléfono válido (9 dígitos)",
   }),
@@ -34,12 +32,12 @@ const formSchema = z.object({
 export function Formulario() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const { toast } = useToast();
 
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      email: "",
       phone: "",
       message: "",
     },
@@ -48,13 +46,23 @@ export function Formulario() {
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     try {
-      // Simular envío
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log("Formulario enviado:", data);
+      const numero = '51922578858';
+      const whatsappMessage = `Hola, mi nombre es *${data.name}*. Mi número es *${data.phone}*. Mensaje: ${data.message}`;
+      const whatsappURL = `https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(whatsappMessage)}`;
+      
+      window.open(whatsappURL, "_blank");
+      
       setIsSuccess(true);
       form.reset();
+      
+      toast.success("Mensaje enviado por WhatsApp correctamente");
     } catch (error) {
-      console.error("Error al enviar:", error);
+      console.error("Error al enviar mensaje", error);
+      toast({
+        variant: "destructive",
+        title: "Error al enviar el mensaje",
+        description: "There was a problem with your request.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -87,35 +95,6 @@ export function Formulario() {
                 </FormControl>
                 <AnimatePresence>
                   {form.formState.errors.name && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                    >
-                      <FormMessage />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input
-                    className={cn(inputClasses)}
-                    placeholder="Correo Electrónico"
-                    type="email"
-                    disabled={isSubmitting}
-                    {...field}
-                  />
-                </FormControl>
-                <AnimatePresence>
-                  {form.formState.errors.email && (
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
