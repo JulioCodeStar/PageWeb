@@ -8,9 +8,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 export function ProstheticInterface({ data }) {
 
-  console.log(data);
-  
-
   const [activeCard, setActiveCard] = useState(0);
   return (
     <section className="relative bg-gradient-to-b from-gray-50 to-white overflow-hidden">
