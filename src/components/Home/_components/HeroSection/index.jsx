@@ -35,9 +35,15 @@ export function HeaderSection({ data }) {
   };
 
   return (
-    <section className="relative h-[500px] w-full overflow-hidden">
+    <section className="relative h-[550px] w-full overflow-hidden">
       {/* Video Background */}
-      <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-[500px] object-cover">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
         <source src="/video/FondoWeb.mp4" type="video/mp4" />
       </video>
 
@@ -59,7 +65,7 @@ export function HeaderSection({ data }) {
               className="inline-block text-sm font-medium text-white/70 bg-transparent/20 px-4 py-1.5 rounded-full mb-4 sm:mb-4"
             >
               {data.span}
-            </motion.span> 
+            </motion.span>
 
             {/* Título Principal */}
             <motion.h1
