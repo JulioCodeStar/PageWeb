@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-
 export function SkillSection({ data }) {
   const ProgressBar = () => (
     <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
@@ -77,7 +76,7 @@ export function SkillSection({ data }) {
             <div className="relative rounded-3xl overflow-hidden shadow-xl">
               <div className="aspect-[4/3] lg:aspect-square">
                 <Image
-                  priority 
+                  priority
                   src={data.img.url || "https://placehold.co/600x600/png"}
                   alt="Profesional ejecutivo"
                   width={600}
