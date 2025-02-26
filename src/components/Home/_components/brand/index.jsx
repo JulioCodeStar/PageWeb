@@ -13,7 +13,7 @@ export function BrandSection({ data }) {
   const plugin = useRef(Autoplay({ delay: 2500, stopOnInteraction: false }));
 
   return (
-    <section className="w-full py-12 sm:py-16 lg:py-24 bg-white border-b border-dashed">
+    <section className="w-full py-12 sm:py-16 lg:py-20 bg-white border-b border-dashed">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         <Carousel
           opts={{
@@ -37,7 +37,7 @@ export function BrandSection({ data }) {
                       <Image
                         src={brand.logo.url || "/placeholder.svg"}
                         alt={brand.title}
-                        width={200}
+                        width={100}
                         height={80}
                         className="object-contain filter grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110"
                       />
