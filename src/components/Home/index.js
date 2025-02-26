@@ -6,3 +6,6 @@ export { Team } from './_components/team';
 export { TestimonialsSection } from './_components/testmonios';
 export { FaqsSection } from './_components/faqs';
 export { BlogSection } from './_components/blog';
+export { ExtranjeroSection } from './_components/extranjero';
+export { ExhibicionSection } from './_components/exhibicion';
+export { BrandSection } from './_components/brand';
