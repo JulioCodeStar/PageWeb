@@ -3,58 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 
-const galleryItems = [
-  {
-    id: 1,
-    title: "Rodilla Hidráulica",
-    description: "Control preciso del movimiento mediante sistema hidráulico",
-    features: [
-      "Control de fase de balanceo",
-      "Resistencia ajustable",
-      "Ideal para múltiples velocidades",
-    ],
-    imageUrl: "https://picsum.photos/1000?random=1",
-  },
-  {
-    id: 2,
-    title: "Rodilla Neumática",
-    description: "Sistema neumático para una marcha natural y confortable",
-    features: [
-      "Compresión de aire controlada",
-      "Movimiento suave y fluido",
-      "Peso ligero",
-    ],
-    imageUrl: "https://picsum.photos/1000?random=2",
-  },
-  {
-    id: 3,
-    title: "Rodilla Microcontrolada",
-    description: "Tecnología inteligente para adaptación en tiempo real",
-    features: [
-      "Procesador integrado",
-      "Adaptación automática",
-      "Máxima estabilidad",
-    ],
-    imageUrl: "https://picsum.photos/1000?random=3",
-  },
-  {
-    id: 4,
-    title: "Rodilla Policéntrica",
-    description: "Diseño mecánico avanzado de múltiples ejes",
-    features: [
-      "Mayor estabilidad",
-      "Centro de rotación variable",
-      "Excelente control en sedestación",
-    ],
-    imageUrl: "https://picsum.photos/1000?random=4",
-  },
-];
-
 export function ExhibicionSection({ data }) {
-
-  console.log(data);
   
-
   const [activeItem, setActiveItem] = useState(data.Card[0]);
   const [isHovering, setIsHovering] = useState(false);
 
