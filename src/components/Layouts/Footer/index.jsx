@@ -24,12 +24,14 @@ export const Footer = () => {
             Prótesis Superiores, Inferiores y Estéticas.
           </p>
 
-          {/* <div className="flex items-center py-10 md:py-7">
-            <Button className="bg-white text-[#2a2a2a] hover:bg-[#009ca6] hover:text-white px-4 py-3">
-              <FaBook />
-              <span className="ml-2">Libro de Reclamaciones</span>
-            </Button>
-          </div> */}
+          <div className="flex items-center py-10 md:py-7">
+            <Link href="/reclamaciones">
+              <Button className="bg-white text-[#2a2a2a] hover:bg-[#009ca6] hover:text-white px-3 py-6 rounded-[10px]">
+                <FaBook />
+                <span className="ml-2">Libro de Reclamaciones</span>
+              </Button>
+            </Link>
+          </div>
         </div>
 
         {/* Segunda columna: Horarios */}

@@ -13,7 +13,7 @@ export function HeroSection({ data }) {
         transition={{ duration: 1.5 }}
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('${data.img.url}')`,
+          backgroundImage: `url('${data[0].img.url}')`,
         }}
       >
         {/* Gradient Overlay */}
