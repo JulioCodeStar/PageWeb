@@ -2,19 +2,13 @@
 
 import { useRef, useState } from "react";
 import { format } from "date-fns";
-import { z } from "zod";
+import { es } from "date-fns/locale";
+import { PDFDownloadLink, pdf } from "@react-pdf/renderer";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { es } from "date-fns/locale";
-import {
-  PDFDownloadLink,
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  pdf,
-} from "@react-pdf/renderer";
+import ReclamoPDF from "@/components/reclamos/reclamo-pdf"; // Ajusta la ruta según tu estructura
+import formSchema from "@/lib/formSchema";
+import configAxios from "@/config/configAxios";
 
 import {
   Card,
@@ -51,248 +45,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import {
-  CalendarIcon,
-  CheckIcon,
-  DownloadIcon,
-  MailIcon,
-  PrinterIcon,
-} from "lucide-react";
+import { CalendarIcon, CheckIcon, DownloadIcon, MailIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
-
-const styles = StyleSheet.create({
-  page: {
-    flexDirection: "column",
-    backgroundColor: "#FFFFFF",
-    padding: 30,
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 10,
-    textAlign: "center",
-  },
-  subtitle: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 5,
-    marginTop: 15,
-    borderBottom: "1px solid #000",
-    paddingBottom: 5,
-  },
-  text: {
-    fontSize: 12,
-    marginBottom: 5,
-  },
-  field: {
-    marginBottom: 10,
-  },
-  fieldLabel: {
-    fontSize: 10,
-    color: "#666",
-  },
-  fieldValue: {
-    fontSize: 12,
-  },
-  footer: {
-    marginTop: 30,
-    fontSize: 10,
-    textAlign: "center",
-    color: "#666",
-  },
-});
-
-const ReclamoPDF = ({ data }) => (
-  <Document>
-    <Page size="A4" style={styles.page}>
-      <View style={styles.title}>
-        <Text>LIBRO DE RECLAMACIONES</Text>
-      </View>
-      <Text style={{ fontSize: 10, textAlign: "center", marginBottom: 20 }}>
-        Conforme a lo establecido en el Código de Protección y Defensa del
-        Consumidor Ley N° 29571 y el Decreto Supremo N° 011-2011-PCM
-      </Text>
-
-      <View style={styles.subtitle}>
-        <Text>1. IDENTIFICACIÓN DEL PROVEEDOR</Text>
-      </View>
-      <View style={styles.field}>
-        <Text style={styles.fieldLabel}>Razón Social:</Text>
-        <Text style={styles.fieldValue}>{data.nombreProveedor}</Text>
-      </View>
-      <View style={styles.field}>
-        <Text style={styles.fieldLabel}>RUC:</Text>
-        <Text style={styles.fieldValue}>{data.rucProveedor}</Text>
-      </View>
-      <View style={styles.field}>
-        <Text style={styles.fieldLabel}>Dirección del Establecimiento:</Text>
-        <Text style={styles.fieldValue}>{data.direccionProveedor}</Text>
-      </View>
-
-      <View style={styles.subtitle}>
-        <Text>2. IDENTIFICACIÓN DEL CONSUMIDOR RECLAMANTE</Text>
-      </View>
-      <View style={styles.field}>
-        <Text style={styles.fieldLabel}>Nombres y Apellidos:</Text>
-        <Text style={styles.fieldValue}>
-          {data.nombreConsumidor} {data.apellidoConsumidor}
-        </Text>
-      </View>
-      <View style={styles.field}>
-        <Text style={styles.fieldLabel}>Domicilio:</Text>
-        <Text style={styles.fieldValue}>{data.domicilio}</Text>
-      </View>
-      <View style={styles.field}>
-        <Text style={styles.fieldLabel}>
-          Distrito / Provincia / Departamento:
-        </Text>
-        <Text style={styles.fieldValue}>
-          {data.distrito} / {data.provincia} / {data.departamento}
-        </Text>
-      </View>
-      <View style={styles.field}>
-        <Text style={styles.fieldLabel}>Documento de Identidad:</Text>
-        <Text style={styles.fieldValue}>
-          {data.tipoDocumento.toUpperCase()} - {data.documentoIdentidad}
-        </Text>
-      </View>
-      <View style={styles.field}>
-        <Text style={styles.fieldLabel}>Teléfono:</Text>
-        <Text style={styles.fieldValue}>{data.telefono}</Text>
-      </View>
-      <View style={styles.field}>
-        <Text style={styles.fieldLabel}>Correo Electrónico:</Text>
-        <Text style={styles.fieldValue}>{data.email}</Text>
-      </View>
-
-      {data.menorEdad && (
-        <View style={styles.field}>
-          <Text style={styles.fieldLabel}>Padre o Apoderado:</Text>
-          <Text style={styles.fieldValue}>{data.padreApoderado}</Text>
-        </View>
-      )}
-
-      <View style={styles.subtitle}>
-        <Text>3. IDENTIFICACIÓN DEL BIEN CONTRATADO</Text>
-      </View>
-      <View style={styles.field}>
-        <Text style={styles.fieldLabel}>Tipo:</Text>
-        <Text style={styles.fieldValue}>
-          {data.tipoReclamo === "reclamo"
-            ? "Reclamo (Disconformidad relacionada a los productos o servicios)"
-            : "Queja (Disconformidad no relacionada a los productos o servicios)"}
-        </Text>
-      </View>
-      <View style={styles.field}>
-        <Text style={styles.fieldLabel}>
-          Descripción del producto o servicio:
-        </Text>
-        <Text style={styles.fieldValue}>{data.bienContratado}</Text>
-      </View>
-      {data.monto && (
-        <View style={styles.field}>
-          <Text style={styles.fieldLabel}>Monto reclamado:</Text>
-          <Text style={styles.fieldValue}>S/. {data.monto}</Text>
-        </View>
-      )}
-
-      <View style={styles.subtitle}>
-        <Text>4. DETALLE DE LA RECLAMACIÓN Y PEDIDO DEL CONSUMIDOR</Text>
-      </View>
-      <View style={styles.field}>
-        <Text style={styles.fieldLabel}>Detalle:</Text>
-        <Text style={styles.fieldValue}>{data.detalleReclamo}</Text>
-      </View>
-      <View style={styles.field}>
-        <Text style={styles.fieldLabel}>Pedido del Consumidor:</Text>
-        <Text style={styles.fieldValue}>{data.pedidoConsumidor}</Text>
-      </View>
-
-      <View style={styles.subtitle}>
-        <Text>5. ACCIONES ADOPTADAS POR EL PROVEEDOR</Text>
-      </View>
-      <View style={styles.field}>
-        <Text style={styles.fieldValue}>
-          {data.accionesProveedor || "Pendiente de respuesta por el proveedor"}
-        </Text>
-      </View>
-
-      <View style={styles.subtitle}>
-        <Text>6. FECHA DEL RECLAMO</Text>
-      </View>
-      <View style={styles.field}>
-        <Text style={styles.fieldValue}>
-          {format(data.fecha, "dd/MM/yyyy")}
-        </Text>
-      </View>
-
-      <View style={styles.footer}>
-        <Text>
-          Libro de Reclamaciones conforme al Código de Protección y Defensa del
-          Consumidor - Ley N° 29571 y el Decreto Supremo N° 011-2011-PCM
-        </Text>
-      </View>
-    </Page>
-  </Document>
-);
-
-const formSchema = z.object({
-  // Datos del proveedor
-  nombreProveedor: z
-    .string()
-    .min(2, { message: "El nombre del proveedor es requerido" }),
-  rucProveedor: z
-    .string()
-    .min(11, { message: "El RUC debe tener 11 dígitos" })
-    .max(11),
-  direccionProveedor: z
-    .string()
-    .min(5, { message: "La dirección del establecimiento es requerida" }),
-
-  // Datos del consumidor
-  nombreConsumidor: z.string().min(2, { message: "El nombre es requerido" }),
-  apellidoConsumidor: z
-    .string()
-    .min(2, { message: "El apellido es requerido" }),
-  domicilio: z.string().min(5, { message: "El domicilio es requerido" }),
-  distrito: z.string().min(2, { message: "El distrito es requerido" }),
-  provincia: z.string().min(2, { message: "La provincia es requerida" }),
-  departamento: z.string().min(2, { message: "El departamento es requerido" }),
-  documentoIdentidad: z
-    .string()
-    .min(8, { message: "El documento de identidad es requerido" }),
-  tipoDocumento: z.string(),
-  telefono: z.string().min(6, { message: "El teléfono es requerido" }),
-  email: z.string().email({ message: "Email inválido" }),
-  padreApoderado: z.string().optional(),
-  menorEdad: z.boolean().default(false),
-
-  // Datos del bien contratado
-  tipoReclamo: z.string(),
-  bienContratado: z
-    .string()
-    .min(2, { message: "Descripción del producto o servicio requerida" }),
-  monto: z.string().optional(),
-
-  // Detalle del reclamo
-  detalleReclamo: z
-    .string()
-    .min(10, { message: "El detalle del reclamo es requerido" }),
-  pedidoConsumidor: z
-    .string()
-    .min(10, { message: "El pedido del consumidor es requerido" }),
-
-  // Acciones adoptadas por el proveedor
-  accionesProveedor: z.string().optional(),
-
-  // Fecha
-  fecha: z.date(),
-});
 
 export default function LibroReclamos() {
   const [submitted, setSubmitted] = useState(false);
@@ -303,6 +57,8 @@ export default function LibroReclamos() {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      nombreProveedor: "KYP BIOINGEN S.A.C",
+      rucProveedor: "20600880081",
       tipoDocumento: "dni",
       tipoReclamo: "reclamo",
       fecha: new Date(),
@@ -311,31 +67,59 @@ export default function LibroReclamos() {
     },
   });
 
-  function onSubmit(values) {
-    console.log(values);
-    setFormData(values);
-    setSubmitted(true);
-
-    setTimeout(() => {
-      const generateAndShowPDF = async () => {
-        setIsGeneratingPDF(true);
-
-        try {
-          const pdfBlob = await pdf(<ReclamoPDF data={formData} />).toBlob();
-
-          const pdfUrl = URL.createObjectURL(pdfBlob);
-
-          window.open(pdfUrl, "_blank");
-
-          setIsGeneratingPDF(false);
-        } catch (error) {
-          console.log(error);
-          setIsGeneratingPDF(false);
-        }
-      };
-
-      generateAndShowPDF();
-    }, 2000);
+  async function onSubmit(values) {
+    setIsGeneratingPDF(true);
+    
+    try {
+      // Enviar datos a Strapi
+      const response = await configAxios.post("reclamos", {
+        data: {
+          ...values,
+          fecha: values.fecha.toISOString(),
+        },
+      });
+  
+      if (response.data.data && response.data.data.numero) {
+        const numeroReclamo = response.data.data.numero;
+        setFormData({ ...values, numero: numeroReclamo });
+        setSubmitted(true);
+  
+        // Generar PDF en segundo plano
+        setTimeout(async () => {
+          try {
+            const pdfBlob = await pdf(
+              <ReclamoPDF data={{ ...values, numero: numeroReclamo }} />
+            ).toBlob();
+            const pdfUrl = URL.createObjectURL(pdfBlob);
+            window.open(pdfUrl, "_blank");
+          } catch (pdfError) {
+            console.error("Error generando PDF:", pdfError);
+            alert("Reclamo registrado, pero hubo un error al generar el PDF");
+          }
+        }, 0);
+      } else {
+        throw new Error("Formato de respuesta inesperado");
+      }
+  
+    } catch (error) {
+      console.error("Error completo:", {
+        message: error.message,
+        request: error.config,
+        response: error.response?.data.data || "Sin respuesta del servidor",
+        stack: error.stack,
+      });
+  
+      if (error.response) {
+        alert(
+          `Error ${error.response.status}: ${error.response.data?.error?.message || "Error desconocido"}`
+        );
+      } else {
+        alert("Error de conexión: Verifica tu acceso a internet");
+      }
+      
+    } finally {
+      setIsGeneratingPDF(false);
+    }
   }
 
   return (
@@ -350,16 +134,8 @@ export default function LibroReclamos() {
                 </CardTitle>
                 <CardDescription className="text-gray-600 mt-1">
                   Conforme a lo establecido en el Código de Protección y Defensa
-                  del Consumidor Ley N° 29571 y el Decreto Supremo N°
-                  011-2011-PCM
+                  del Consumidor Ley N° 29571 y el Decreto Supremo N° 011-2011-PCM
                 </CardDescription>
-              </div>
-              <div className="text-right">
-                <p className="text-sm font-medium">Hoja de Reclamación</p>
-                <p className="text-xl font-bold text-gray-900">N° 001-0001</p>
-                <p className="text-xs text-gray-500">
-                  Fecha: {format(new Date(), "dd/MM/yyyy")}
-                </p>
               </div>
             </div>
           </CardHeader>
@@ -368,6 +144,7 @@ export default function LibroReclamos() {
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)}>
                 <CardContent className="space-y-6 pt-6">
+                  {/* Sección 1: Identificación del Proveedor */}
                   <div>
                     <h3 className="text-lg font-semibold mb-4 pb-2 border-b">
                       1. IDENTIFICACIÓN DEL PROVEEDOR
@@ -426,6 +203,7 @@ export default function LibroReclamos() {
 
                   <Separator />
 
+                  {/* Sección 2: Identificación del Consumidor */}
                   <div>
                     <h3 className="text-lg font-semibold mb-4 pb-2 border-b">
                       2. IDENTIFICACIÓN DEL CONSUMIDOR RECLAMANTE
@@ -654,6 +432,7 @@ export default function LibroReclamos() {
 
                   <Separator />
 
+                  {/* Sección 3: Identificación del Bien Contratado */}
                   <div>
                     <h3 className="text-lg font-semibold mb-4 pb-2 border-b">
                       3. IDENTIFICACIÓN DEL BIEN CONTRATADO
@@ -672,16 +451,12 @@ export default function LibroReclamos() {
                                 className="flex flex-col space-y-1"
                               >
                                 <div className="flex items-center space-x-2">
-                                  <RadioGroupItem
-                                    value="reclamo"
-                                    id="reclamo"
-                                  />
+                                  <RadioGroupItem value="reclamo" id="reclamo" />
                                   <label
                                     htmlFor="reclamo"
                                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                                   >
-                                    Reclamo (Disconformidad relacionada a los
-                                    productos o servicios)
+                                    Reclamo (Disconformidad relacionada a los productos o servicios)
                                   </label>
                                 </div>
                                 <div className="flex items-center space-x-2">
@@ -690,10 +465,7 @@ export default function LibroReclamos() {
                                     htmlFor="queja"
                                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                                   >
-                                    Queja (Disconformidad no relacionada a los
-                                    productos o servicios; o, malestar o
-                                    descontento respecto a la atención al
-                                    público)
+                                    Queja (Disconformidad no relacionada a los productos o servicios; o, malestar o descontento respecto a la atención al público)
                                   </label>
                                 </div>
                               </RadioGroup>
@@ -738,6 +510,7 @@ export default function LibroReclamos() {
 
                   <Separator />
 
+                  {/* Sección 4: Detalle del Reclamo */}
                   <div>
                     <h3 className="text-lg font-semibold mb-4 pb-2 border-b">
                       4. DETALLE DE LA RECLAMACIÓN Y PEDIDO DEL CONSUMIDOR
@@ -782,6 +555,7 @@ export default function LibroReclamos() {
 
                   <Separator />
 
+                  {/* Sección 5: Acciones Adoptadas por el Proveedor */}
                   <div>
                     <h3 className="text-lg font-semibold mb-4 pb-2 border-b">
                       5. ACCIONES ADOPTADAS POR EL PROVEEDOR
@@ -811,6 +585,7 @@ export default function LibroReclamos() {
 
                   <Separator />
 
+                  {/* Sección 6: Fecha del Reclamo */}
                   <div>
                     <h3 className="text-lg font-semibold mb-4 pb-2 border-b">
                       6. FECHA DEL RECLAMO
@@ -863,6 +638,7 @@ export default function LibroReclamos() {
                     </div>
                   </div>
 
+                  {/* Información adicional */}
                   <div className="bg-gray-50 p-4 rounded-lg border text-sm">
                     <p className="font-medium mb-2">IMPORTANTE:</p>
                     <ul className="list-disc pl-5 space-y-1">
@@ -907,8 +683,7 @@ export default function LibroReclamos() {
                 </div>
                 <h3 className="text-xl font-bold">¡Reclamo Registrado!</h3>
                 <p className="text-gray-600 max-w-md mx-auto">
-                  Su reclamo ha sido registrado con éxito. Recibirá una
-                  respuesta en un plazo máximo de 30 días calendario.
+                  Su reclamo ha sido registrado con éxito. Recibirá una respuesta en un plazo máximo de 30 días calendario.
                 </p>
                 <div className="pt-6 flex flex-col sm:flex-row gap-4 justify-center">
                   {formData && (
@@ -917,7 +692,7 @@ export default function LibroReclamos() {
                       fileName="libro-reclamaciones.pdf"
                       className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
                     >
-                      {({ blob, url, loading, error }) =>
+                      {({ loading }) =>
                         loading ? (
                           "Generando PDF..."
                         ) : (
@@ -929,21 +704,9 @@ export default function LibroReclamos() {
                       }
                     </PDFDownloadLink>
                   )}
-                  <Button
-                    // onClick={sendEmail}
-                    variant="outline"
-                    className="flex items-center gap-2"
-                    // disabled={isSendingEmail}
-                  >
-                    <MailIcon className="h-4 w-4" />
-                    {/* {isSendingEmail ? "Enviando..." : "Enviar por correo"} */}
-                  </Button>
                 </div>
                 <div className="pt-4">
-                  <Button
-                    onClick={() => setSubmitted(false)}
-                    variant="secondary"
-                  >
+                  <Button onClick={() => setSubmitted(false)} variant="secondary">
                     Volver al formulario
                   </Button>
                 </div>
@@ -954,8 +717,7 @@ export default function LibroReclamos() {
       </div>
 
       <div className="mt-4 text-center text-xs text-gray-500">
-        Libro de Reclamaciones conforme al Código de Protección y Defensa del
-        Consumidor - Ley N° 29571 y el Decreto Supremo N° 011-2011-PCM
+        Libro de Reclamaciones conforme al Código de Protección y Defensa del Consumidor - Ley N° 29571 y el Decreto Supremo N° 011-2011-PCM
       </div>
     </div>
   );
