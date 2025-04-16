@@ -202,8 +202,8 @@ export const menuData = {
     {
       __component: "menu.menu-link",
       id: 16,
-      title: "Blog",
-      url: "/blog",
+      title: "Podcasts",
+      url: "/podcasts",
     },
     {
       __component: "menu.menu-link",
