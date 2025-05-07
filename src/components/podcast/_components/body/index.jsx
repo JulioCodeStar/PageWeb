@@ -9,6 +9,14 @@ const episodes = [
     thumbnail: "/img/podcast/eps.1.png",
     youtubeUrl: "https://www.youtube.com/watch?v=hpD7YaWfu7A&list=PLG_K7NnvwwWtvZGuj3X2kV75AnORZuws4&index=2&t=601s",
   },
+  {
+    id: 2,
+    title: "Episodio 2: ADAPTÁNDOME A UNA PRÓTESIS DE MANO PARCIAL | KYP BIOINGENIERÍA",
+    description:
+      `En este segundo episodio, Renzo nos comparte su experiencia tras perder parte de su mano 🖐️ Nos cuenta cómo fue su adaptación a una prótesis biomecánica de mano parcial y cómo retomó su día a día con confianza y determinación 💪🧩`,
+    thumbnail: "/img/podcast/eps.2.png",
+    youtubeUrl: "https://www.youtube.com/watch?v=C8JjierSR18",
+  }
 ];
 
 export function BodySection() {
