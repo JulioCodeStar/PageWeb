@@ -16,6 +16,17 @@ const episodes = [
       `En este segundo episodio, Renzo nos comparte su experiencia tras perder parte de su mano 🖐️ Nos cuenta cómo fue su adaptación a una prótesis biomecánica de mano parcial y cómo retomó su día a día con confianza y determinación 💪🧩`,
     thumbnail: "/img/podcast/eps.2.png",
     youtubeUrl: "https://www.youtube.com/watch?v=C8JjierSR18",
+  },
+  {
+    id: 3,
+    title: "Episodio 3: ADAPTÁNDOME A UNA PRÓTESIS DE PIE CHOPART | KYP BIOINGENIERÍA",
+    description:
+      `En este episodio, Fredy nos comparte cómo ha sido su proceso de adaptación a una prótesis de pie tipo Chopart tras una amputación parcial del pie 🦶 
+      Desde su experiencia personal, nos habla con honestidad sobre los retos físicos y emocionales, y cómo ha ido recuperando su independencia paso a paso 💪🛤️ 
+      Nos acompaña también el ingeniero Rony, quien brinda una mirada profesional al caso de Fredy y nos explica conceptos clave como el ciclo de marcha, aportando claridad y contexto técnico de forma accesible 👨‍🔬📊
+      Una conversación enriquecedora que combina ciencia, experiencia de vida y esperanza 🙌`,
+    thumbnail: "/img/podcast/eps.3.jpg",
+    youtubeUrl: "https://www.youtube.com/watch?v=ikw4oByXMYM",
   }
 ];
 
