@@ -1,11 +1,10 @@
 import axios from "axios";
 
-const configAxios = {
-    baseURL: process.env.NEXT_PUBLIC_STRAPI_URL,
-    // headers: {
-    //     "Content-Type": "application/json",
-    //     "Authorization": `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
-    // },
-};
+const API = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
 
-export default axios.create(configAxios);
+const configAxios = axios.create({
+  baseURL: `${API.replace(/\/$/, "")}/api`,  // quedará "...com/api"
+  timeout: 10_000,
+});
+
+export default configAxios;
