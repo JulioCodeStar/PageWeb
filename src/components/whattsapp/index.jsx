@@ -29,7 +29,7 @@ const WhatsAppButton = () => {
               El equipo suele responder en unos minutos.
             </div>
             <a
-              href="https://wa.me/1234567890" // Reemplaza con tu número
+              href="https://wa.me/51922578858" // Reemplaza con tu número
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 px-8 py-4 hover:bg-gray-50 border-t"
@@ -41,19 +41,7 @@ const WhatsAppButton = () => {
               </div>
               <PhoneIcon className="w-5 h-5 text-green-500 ml-auto" />
             </a>
-            <a
-              href="https://wa.me/1234567890" // Reemplaza con tu número
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 px-8 py-4 hover:bg-gray-50 border-t"
-            >
-              <PhoneIcon className="w-10 h-10 text-green-500" />
-              <div>
-                <div className="font-medium">Cursos</div>
-                <div className="text-sm text-gray-500">Consultas</div>
-              </div>
-              <PhoneIcon className="w-5 h-5 text-green-500 ml-auto" />
-            </a>
+
             <button
               onClick={() => setIsOpen(false)}
               className="absolute top-2 right-2 text-white hover:opacity-75"
