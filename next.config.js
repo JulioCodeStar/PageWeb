@@ -19,6 +19,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "facebook.com"
+      },
+      {
+        protocol: "https",
+        hostname: "picsum.dev"
       }
     ],
   },

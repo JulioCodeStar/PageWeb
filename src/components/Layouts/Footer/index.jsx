@@ -8,7 +8,7 @@ import Image from "next/image";
 
 export const Footer = () => {
   return (
-    <footer className="w-full bg-device-950 text-white p-12 lg:px-36">
+    <footer className="w-full bg-[#00939e] text-white p-12 lg:px-36">
       <div className="container mx-auto md:grid md:grid-cols-4 md:gap-8 h-auto">
         {/* Primera columna: Logo y descripción */}
         <div className="py-10 md:py-0">
@@ -94,6 +94,12 @@ export const Footer = () => {
                 Chiclayo: <br /> Loreto 223, Chiclayo 14009
               </span>
             </div>
+            <div className="flex items-center space-x-2">
+              <FaHome />
+              <span>
+                Piura: <br /> Los Rubies W22, 20002
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -103,7 +109,7 @@ export const Footer = () => {
       {/* Pie de página */}
       <div className="flex items-center justify-center text-white">
         <span className="text-center">
-          Copyright © 2024 KYPBioingenieria | All rights reserved
+          Copyright © {new Date().getFullYear()} KYPBioingenieria | All rights reserved
         </span>
       </div>
     </footer>

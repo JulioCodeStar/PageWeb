@@ -202,13 +202,13 @@ export const menuData = {
     {
       __component: "menu.menu-link",
       id: 16,
-      title: "Podcasts",
+      title: "Blog / Podcasts",
       url: "/podcasts",
     },
     {
       __component: "menu.menu-link",
       id: 17,
-      title: "Contactos",
+      title: "Contactos y Citas",
       url: "/contactos",
     },
   ],

@@ -42,7 +42,7 @@ export default function MenuItems() {
 
   return (
     <nav className="hidden lg:flex items-center">
-      <ul className="flex items-center gap-2">
+      <ul className="flex items-center gap-2 text-sm">
         {items.MainMenuItems.map((item) => (
           <motion.li
             key={item.id}
@@ -54,7 +54,7 @@ export default function MenuItems() {
             {isMenuLink(item) ? (
               <Link href={item.url}>
                 <motion.span
-                  className="px-4 py-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 inline-block relative"
+                  className="px-4 py-2 rounded-lg text-[#216F75] hover:text-blue-600 transition-colors duration-200 inline-block relative"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -73,7 +73,7 @@ export default function MenuItems() {
                 onMouseLeave={() => setOpenDropdown(false)}
               >
                 <motion.button
-                  className="px-4 py-2 rounded-lg text-gray-700 hover:text-blue-600 transition-colors duration-200 flex items-center gap-1"
+                  className="px-4 py-2 rounded-lg text-[#216F75] hover:text-blue-600 transition-colors duration-200 flex items-center gap-1"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >

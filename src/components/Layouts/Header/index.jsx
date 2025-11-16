@@ -1,10 +1,10 @@
 import { useEffect, useState, useCallback } from "react";
 import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Phone, Menu } from "lucide-react";
 import MenuItems from "./menu-Items";
 import Image from "next/image";
 import MobileMenu from "./menu-mobile";
+import { fbEvent } from "@/lib/fpixel";
 
 export default function Header() {
   const [isFixed, setIsFixed] = useState(false);
@@ -82,6 +82,14 @@ export default function Header() {
   };
 
   const enviarWhatsapp = (text) => {
+    // 🔹 1. Disparar evento al Pixel
+    fbEvent("Lead", {
+      content_name: text, // ej: "Prótesis transfemoral"
+      action: "click_whatsapp", // etiqueta interna para ti
+      channel: "web_kyp", // opcional
+    });
+
+    // 🔹 2. Abrir WhatsApp como ya lo tienes
     const numero = "51922578858";
     const mensaje = `👋Hola, estoy interesado *${text}*🛍️. ¿Podrías darme más detalles?🤔`;
     const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
@@ -115,16 +123,11 @@ export default function Header() {
           !isTop ? "shadow-md" : ""
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <motion.div
-              variants={logoVariants}
-              initial="initial"
-              whileHover="hover"
-              className="relative z-10"
-            >
-              <div className="relative w-28 md:w-36 aspect-[3/1]">
+            <div className="relative z-10 flex items-center gap-4">
+              <div className="relative w-28 md:w-32 aspect-[3/1]">
                 <Image
                   src="/img/encabezado.png"
                   alt="KYP Bioingeniería"
@@ -134,11 +137,11 @@ export default function Header() {
                   sizes="(max-width: 768px) 112px, 144px"
                 />
               </div>
-            </motion.div>
 
-            {/* Navigation */}
-            <div className="hidden lg:block">
-              <MenuItems />
+              {/* Navigation */}
+              <div className="hidden lg:block">
+                <MenuItems />
+              </div>
             </div>
 
             {/* Actions */}
@@ -150,10 +153,26 @@ export default function Header() {
                 whileTap="tap"
               >
                 <Button
-                  onClick={() => enviarWhatsapp('(escriba el servicio)')}
-                  className="bg-device-600 hover:bg-device-700 text-white px-6 py-6 rounded-xl flex items-center gap-2"
+                  onClick={() => enviarWhatsapp("(escriba el servicio)")}
+                  className="bg-[#00939e] hover:bg-[#006f7a] text-white px-4 py-6 rounded-xl flex items-center gap-2"
                 >
-                  <Phone className="w-4 h-4" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-brand-whatsapp"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
+                    <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
+                  </svg>
+                  {/* <Phone className="w-4 h-4" /> */}
                   <span className="hidden sm:inline">Contáctenos</span>
                 </Button>
               </motion.div>

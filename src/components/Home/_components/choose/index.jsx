@@ -36,7 +36,7 @@ export function Choose({ data }) {
 
   return (
     <>
-      <section className="relative w-full overflow-hidden bg-device-950 px-4 py-16 sm:py-20 lg:py-24">
+      <section className="relative w-full overflow-hidden bg-[#00939e] px-4 py-16 sm:py-20 lg:py-24">
         {/* Background images */}
         <div
           className="absolute right-0 top-0 hidden h-full w-[calc(50%-224px)] bg-cover bg-center bg-no-repeat lg:block"
@@ -49,7 +49,7 @@ export function Choose({ data }) {
           transition={{ duration: 1 }}
         />
 
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-8 max-w-8xl">
           <motion.div
             ref={mainRef}
             variants={containerVariants}
@@ -62,10 +62,10 @@ export function Choose({ data }) {
               variants={itemVariants}
               className="mb-12 text-center lg:text-left"
             >
-              <span className="inline-block rounded-full bg-white/10 px-4 py-1 text-lg text-white backdrop-blur-sm sm:text-xl lg:text-2xl">
+              <span className="inline-block rounded-full bg-white/10 px-4 py-1 text-lg text-white backdrop-blur-sm sm:text-xl lg:text-2xl mb-4">
                 {data.span}
               </span>
-              <h2 className="mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-extrabold leading-tight tracking-tight text-white max-w-7xl mx-auto mb-4 sm:mb-5 md:mb-6  lg:mb-8 uppercase">
                 {data.title}
               </h2>
             </motion.div>
@@ -102,7 +102,7 @@ export function Choose({ data }) {
 
       {/* Stats section */}
       <section className="relative -mt-16 px-4">
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-8xl">
           <motion.div
             ref={statsRef}
             variants={containerVariants}
@@ -119,7 +119,7 @@ export function Choose({ data }) {
               >
                 <Card className="group h-full overflow-hidden rounded-xl bg-white p-4 text-center shadow-lg transition-all duration-300 hover:shadow-xl sm:p-6">
                   <CardHeader className="pb-2 sm:pb-4">
-                    <span className="text-3xl font-bold text-device-800 sm:text-4xl lg:text-5xl">
+                    <span className="text-3xl font-bold text-[#00939e] sm:text-4xl lg:text-5xl">
                       {stat.count}
                     </span>
                   </CardHeader>

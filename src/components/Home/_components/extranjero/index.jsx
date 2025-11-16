@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 
 const containerVariants = {
@@ -9,9 +9,9 @@ const containerVariants = {
     opacity: 1,
     transition: {
       delayChildren: 0.3,
-      staggerChildren: 0.2
-    }
-  }
+      staggerChildren: 0.2,
+    },
+  },
 };
 
 const itemVariants = {
@@ -21,20 +21,20 @@ const itemVariants = {
     opacity: 1,
     transition: {
       duration: 0.5,
-      ease: "easeOut"
-    }
-  }
+      ease: "easeOut",
+    },
+  },
 };
 
 export function ExtranjeroSection({ data }) {
-
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
-        <div className="grid gap-8 lg:grid-cols-2">
+      <div className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
+        {/* ⬇⬇ Bloque centrado */}
+        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-2">
           {/* Columna de contenido */}
           <motion.div
             ref={ref}
@@ -44,13 +44,10 @@ export function ExtranjeroSection({ data }) {
             className="flex flex-col justify-center space-y-6"
           >
             <div className="space-y-4">
-              <div className="inline-block text-xs sm:text-sm lg:text-base text-center font-medium text-blue-800 bg-blue-50 px-3 sm:px-4 py-1.5 rounded-full">
-                {data.span}
-              </div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold leading-tight tracking-tight text-device-900">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-extrabold leading-tight tracking-tight text-[#00939e] max-w-7xl mx-auto mb-4 sm:mb-5 md:mb-6 lg:mb-8 uppercase">
                 {data.title}
               </h2>
-              <p className="text-sm sm:text-base lg:text-lg text-muted-foreground text-center lg:text-left">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-xl font-normal text-gray-500 max-w-6xl mx-auto leading-relaxed">
                 {data.description}
               </p>
             </div>
@@ -64,11 +61,14 @@ export function ExtranjeroSection({ data }) {
             variants={containerVariants}
             className="relative h-96 md:h-[400px] lg:h-[500px]"
           >
-            <motion.div variants={containerVariants} className="grid grid-cols-2 gap-4 h-full">
+            <motion.div
+              variants={containerVariants}
+              className="grid grid-cols-2 gap-4 h-full"
+            >
               {/* Imagen grande izquierda */}
               <div className="relative rounded-xl overflow-hidden">
                 <Image
-                  src={ data.img_1.url || "https://picsum.photos/1000"}
+                  src={data.img_1.url || "https://picsum.photos/1000"}
                   alt="Especialista ajustando una prótesis"
                   className="object-cover transition-transform hover:scale-105 duration-300"
                   fill
@@ -76,13 +76,13 @@ export function ExtranjeroSection({ data }) {
                   priority
                 />
               </div>
-              
+
               {/* Contenedor de las dos imágenes derechas */}
               <div className="flex flex-col space-y-4">
                 {/* Primera imagen derecha (superior) */}
                 <div className="relative flex-1 rounded-xl overflow-hidden">
                   <Image
-                    src={ data.img_2.url || "https://picsum.photos/800"}
+                    src={data.img_2.url || "https://picsum.photos/800"}
                     alt="Tecnología protésica avanzada"
                     className="object-cover transition-transform hover:scale-105 duration-300"
                     fill
@@ -92,7 +92,7 @@ export function ExtranjeroSection({ data }) {
                 {/* Segunda imagen derecha (inferior) */}
                 <div className="relative flex-1 rounded-xl overflow-hidden">
                   <Image
-                    src={ data.img_3.url || "https://picsum.photos/800"}
+                    src={data.img_3.url || "https://picsum.photos/800"}
                     alt="Equipo internacional de especialistas"
                     className="object-cover transition-transform hover:scale-105 duration-300"
                     fill
@@ -101,11 +101,14 @@ export function ExtranjeroSection({ data }) {
                 </div>
               </div>
             </motion.div>
-            
+
             {/* Overlay con información */}
             <Card className="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm">
               <CardContent className="p-4">
-                <motion.p variants={containerVariants} className="text-sm font-medium text-gray-900">
+                <motion.p
+                  variants={containerVariants}
+                  className="text-sm font-medium text-gray-900"
+                >
                   {data.span_img}
                 </motion.p>
               </CardContent>

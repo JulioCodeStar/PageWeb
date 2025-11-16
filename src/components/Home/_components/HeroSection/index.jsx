@@ -35,7 +35,7 @@ export function HeaderSection({ data }) {
   };
 
   return (
-    <section className="relative h-[550px] w-full overflow-hidden">
+    <section className="relative h-[850px] w-full overflow-hidden">
       {/* Video Background */}
       <video
         autoPlay
@@ -51,7 +51,7 @@ export function HeaderSection({ data }) {
       <div className="absolute inset-0 bg-black/50" />
 
       {/* Contenido Principal Centrado */}
-      <div className="relative flex items-center justify-center h-[500px]">
+      <div className="relative flex items-center justify-center h-[800px]">
         <div className="max-w-4xl px-4 sm:px-6 text-center">
           <motion.div
             className="space-y-6"
@@ -62,7 +62,7 @@ export function HeaderSection({ data }) {
             {/* Badge */}
             <motion.span
               variants={itemVariants}
-              className="inline-block text-sm font-medium text-white/70 bg-transparent/20 px-4 py-1.5 rounded-full mb-4 sm:mb-4"
+              className="inline-block text-sm font-medium text-white/70 bg-transparent/20 px-4 py-1.5 rounded-full mb-4 sm:mb-4 lg:mb-16"
             >
               {data.span}
             </motion.span>

@@ -9,3 +9,5 @@ export { BlogSection } from './_components/blog';
 export { ExtranjeroSection } from './_components/extranjero';
 export { ExhibicionSection } from './_components/exhibicion';
 export { BrandSection } from './_components/brand';
+export { CasoExitoSection } from './_components/CasoExito';
+export { ProblemSection } from './_components/problem';
