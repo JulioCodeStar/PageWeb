@@ -1,22 +1,22 @@
 import { Html, Head, Main, NextScript } from "next/document";
 import { Toaster } from "@/components/ui/toaster";
-import Script from 'next/script';
+import { FB_PIXEL_ID } from '@/lib/fpixel'
 
 export default function Document() {
   return (
-    <Html lang="en">
-      
-      <Head />
-      <body>
+    <Html lang="es">  
+      <Head>
         {/* Imagen de fallback para navegadores sin JS */}
           <noscript>
             <img
               height="1"
               width="1"
               style={{ display: 'none' }}
-              src="https://www.facebook.com/tr?id=998253810564602&ev=PageView&noscript=1"
+              src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`}
             />
           </noscript>
+      </Head>
+      <body>
         <Main />
         <NextScript />
         <Toaster />

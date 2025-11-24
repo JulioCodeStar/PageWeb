@@ -7,7 +7,7 @@ import Script from "next/script";
 import "@/styles/globals.css";
 import Layout from "@/components/Layouts/_Layout";
 
-import { FB_PIXEL_ID, fbPageView } from "@/lib/fpixel";
+import * as fbq from "@/lib/fpixel";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -18,16 +18,18 @@ export default function App({ Component, pageProps }) {
   const router = useRouter();
 
   useEffect(() => {
+    
+    fbq.pageview();
+
     const handleRouteChange = () => {
-      fbPageView(); // PageView en cada cambio de ruta
-    };
+      fbq.pageview();
+    }
 
-    router.events.on("routeChangeComplete", handleRouteChange);
-
-    // Limpieza
+    router.events.on('routeChangeComplete', handleRouteChange)
     return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+    
   }, [router.events]);
 
   return (
@@ -53,7 +55,7 @@ export default function App({ Component, pageProps }) {
               s.parentNode.insertBefore(t,s)
             }(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '${FB_PIXEL_ID}');
+            fbq('init', '${fbq.FB_PIXEL_ID}');
             fbq('track', 'PageView');
           `,
           }}

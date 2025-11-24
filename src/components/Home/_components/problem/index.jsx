@@ -9,19 +9,19 @@ export const ProblemSection = () => {
       id: 1,
       title: "FISIOTERAPIA",
       description: "La fisioterapia es un paciente amoldado de cintura en cuidar el muñón, fortalecer el cuerpo, prevenir deformidades y preservar el uso de las prótesis para que pueda moverse con seguridad e independencia, acompañándolo también en su adaptación física y emocional.",
-      image: "/img/img-problem.png"
+      image: "/img/aqs.png"
     },
     {
       id: 2,
       title: "REHABILITACIÓN",
       description: "Nuestro programa de rehabilitación integral ayuda a los pacientes a recuperar su movilidad y confianza mediante técnicas especializadas y acompañamiento personalizado.",
-      image: "/img/img-problem.png"
+      image: "/img/dsd.png"
     },
     {
       id: 3,
       title: "PRÓTESIS",
       description: "Diseñamos y adaptamos prótesis de última generación que se ajustan perfectamente a las necesidades de cada paciente, mejorando su calidad de vida.",
-      image: "/img/img-problem.png"
+      image: "/img/faed.png"
     }
   ];
 
