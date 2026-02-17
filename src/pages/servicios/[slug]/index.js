@@ -11,18 +11,33 @@ import {
 import configAxios from "@/config/configAxios";
 
 export async function getStaticPaths() {
-  const respuesta = await configAxios.get("services");
+  try {
+    const respuesta = await configAxios.get("services");
 
-  const paths = respuesta.data.data.map((servicio) => ({
-    params: {
-      slug: servicio.slug.split("/").pop(),
-    },
-  }));
+    const paths = (respuesta?.data?.data ?? [])
+      .map((servicio) => {
+        const slug = (servicio?.slug || servicio?.attributes?.slug || "")
+          .toString()
+          .split("/")
+          .pop();
 
-  return {
-    paths,
-    fallback: "blocking",
-  };
+        if (!slug) return null;
+
+        return { params: { slug } };
+      })
+      .filter(Boolean);
+
+    return {
+      paths,
+      fallback: "blocking",
+    };
+  } catch (error) {
+    // ✅ Si tu API está caída (502) durante el build, NO tumba el deploy
+    return {
+      paths: [],
+      fallback: "blocking",
+    };
+  }
 }
 
 export async function getStaticProps({ params: { slug } }) {
@@ -31,38 +46,31 @@ export async function getStaticProps({ params: { slug } }) {
       `services?filters[slug][$eq]=/servicios/${slug}&populate=SectionDynamic.img_background,SectionDynamic.img,SectionDynamic.List,SectionDynamic.Card.img,SectionDynamic.Card.icon,SectionDynamic.Producto.img,SectionDynamic.List.icon,SectionDynamic.FAQS,SectionDynamic.Producto.List,seo,seo.openGraph`
     );
 
-    const servicesData = res.data.data[0];
+    const servicesData = res?.data?.data?.[0] ?? null;
+
+    if (!servicesData) {
+      return { notFound: true, revalidate: 60 };
+    }
 
     return {
       props: {
-        data: servicesData.SectionDynamic || null, // Agregamos fallback a null
-        seo: servicesData.seo || null,
+        data: servicesData?.SectionDynamic ?? null,
+        seo: servicesData?.seo ?? null,
       },
       revalidate: 60,
     };
   } catch (error) {
-    return {
-      props: {
-        data: null,
-        seo: null,
-        error: error.message || "Error al cargar los datos",
-      },
-    };
+    // En producción es mejor devolver 404 que mostrar el error crudo
+    return { notFound: true, revalidate: 60 };
   }
 }
 
-export default function Servicios({ data, error, seo }) {
-  console.log(seo);
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
+export default function Servicios({ data, seo }) {
   const {
     metaTitle,
     metaDescription,
     metaRobots,
-    metaImage, // Una URL a la imagen por defecto
+    metaImage,
     ogTitle,
     ogDescription,
     ogImage,
@@ -71,12 +79,11 @@ export default function Servicios({ data, error, seo }) {
 
   return (
     <>
-      {/* Inyectamos los metadatos SEO en el <head> */}
       <NextSeo
         title={metaTitle || "Título por defecto"}
         description={metaDescription || "Descripción por defecto"}
         canonical={canonicalURL || "https://www.tusitio.com/"}
-        robotsProps={metaRobots}
+        // Si metaRobots te llega como string, no lo pases en robotsProps.
         openGraph={{
           title: ogTitle || metaTitle || "Título OG por defecto",
           description:
@@ -90,7 +97,7 @@ export default function Servicios({ data, error, seo }) {
                 "https://www.tusitio.com/default-og-image.jpg",
               width: 1200,
               height: 630,
-              alt: "Imagen de la página de inicio",
+              alt: "Imagen",
             },
           ],
         }}
