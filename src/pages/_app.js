@@ -6,6 +6,7 @@ import Script from "next/script";
 
 import "@/styles/globals.css";
 import Layout from "@/components/Layouts/_Layout";
+import MediaProtection from "@/components/MediaProtection";
 
 import * as fbq from "@/lib/fpixel";
 
@@ -34,6 +35,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <div className={montserrat.className}>
+      <MediaProtection />
       <Layout>
         {/* Script base del Meta Pixel */}
         <Script

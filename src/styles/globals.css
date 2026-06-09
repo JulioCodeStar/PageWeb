@@ -96,6 +96,14 @@
   * {
     @apply border-border;
   }
+
+  img,
+  video {
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+
   body {
     @apply bg-background;
   }
