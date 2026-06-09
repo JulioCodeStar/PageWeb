@@ -81,7 +81,8 @@ export function CasoExitoSection({ data }) {
                 {/* Testimonio */}
                 <div className="mb-8 pb-8 border-b border-muted">
                   <p className="text-lg md:text-xl text-foreground leading-relaxed italic">
-                    {currentSlide?.description}
+                    {currentSlide?.description ||
+                      "Conoce cómo una solución protésica personalizada puede mejorar la movilidad, la seguridad y la autonomía."}
                   </p>
                 </div>
 

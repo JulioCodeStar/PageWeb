@@ -5,6 +5,10 @@ import { FiFacebook } from "react-icons/fi";
 import { FaInstagram, FaYoutube } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa6";
 import Link from "next/link";
+import {
+  SALES_PHONE_DISPLAY,
+  SALES_PHONE_URL,
+} from "@/lib/contact";
 
 export const HeaderBanner = () => {
   return (
@@ -30,12 +34,15 @@ export const HeaderBanner = () => {
             </div>
 
             {/* Phone */}
-            <div className="flex items-center gap-2">
+            <a
+              href={SALES_PHONE_URL}
+              className="flex items-center gap-2 hover:text-white"
+            >
               <MdOutlinePhone className="w-4 h-4 text-white/90" />
               <span className="text-[15px] md:text-xs text-white/90">
-                (+51) 922578858
+                {SALES_PHONE_DISPLAY}
               </span>
-            </div>
+            </a>
 
             {/* Locations */}
             <div className="flex items-center gap-2">

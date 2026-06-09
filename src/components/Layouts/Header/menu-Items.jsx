@@ -100,6 +100,18 @@ export default function MenuItems() {
                       }}
                     >
                       <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+                        <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
+                          <span className="font-semibold text-gray-900">
+                            Nuestras soluciones
+                          </span>
+                          <Link
+                            href={item.url}
+                            className="inline-flex items-center gap-2 text-sm font-medium text-[#00939e] hover:text-[#006f7a]"
+                          >
+                            Ver todos los servicios
+                            <MoveRight className="h-4 w-4" />
+                          </Link>
+                        </div>
                         <div className="grid grid-cols-3 gap-0">
                           {item.sections.map((section) => (
                             <div

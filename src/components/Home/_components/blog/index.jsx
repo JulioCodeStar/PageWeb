@@ -33,9 +33,9 @@ export function BlogSection() {
 
   return (
     <section className="bg-gray-50 overflow-hidden">
-      <div className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
+      <div className="mx-auto max-w-8xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
         {/* Header */}
-        <div className="mx-auto max-w-3xl text-center space-y-4 mb-8 sm:mb-12 lg:mb-16">
+        <div className="mx-auto mb-6 max-w-3xl space-y-3 text-center sm:mb-8 lg:mb-10">
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-extrabold leading-tight tracking-tight text-[#00939e] max-w-7xl mx-auto mb-4 sm:mb-5 md:mb-6 lg:mb-8 px-4 uppercase" >
             Artículos recientes sobre prótesis y sus usuarios
           </h2>

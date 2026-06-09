@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,23 +13,23 @@ export function Services() {
   return (
     <section className="w-full bg-white overflow-hidden">
       {/* Título general */}
-      <div className="w-full px-4 py-10 sm:py-12 text-center">
-        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-extrabold leading-tight tracking-tight text-[#00939e] max-w-7xl mx-auto mb-4 sm:mb-5 md:mb-6 lg:mb-8 px-4">
+      <div className="w-full px-4 py-8 text-center sm:py-10">
+        <h2 className="mx-auto max-w-7xl px-4 text-xl font-extrabold leading-tight tracking-tight text-[#00939e] sm:text-2xl md:text-3xl lg:text-4xl">
           TIPOS DE PRÓTESIS QUE REALIZAMOS
         </h2>
       </div>
 
       {/* 1. PRÓTESIS SUPERIOR */}
       <div className="w-full bg-[#00939e] text-white">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 py-12 sm:py-16 lg:py-20">
+        <div className="flex flex-col items-center justify-between gap-5 py-8 sm:gap-8 sm:py-12 lg:flex-row lg:py-16">
           {/* Imagen izquierda, pegada al borde */}
-          <div className="relative w-full md:w-1/2 lg:w-1/2 h-72 sm:h-80 lg:h-[420px]">
-            <div className="lg:absolute lg:top-0 md:inset-x-52 lg:-inset-y-20">
+          <div className="relative h-56 w-full sm:h-72 md:w-1/2 lg:h-[380px] lg:w-1/2">
+            <div className="absolute inset-0">
               <Image
                 src="/img/services/Object.png"
                 alt="Prótesis superior biónica"
                 fill
-                className="object-contain object-left"
+                className="object-contain object-center"
                 priority
               />
             </div>
@@ -44,8 +43,12 @@ export function Services() {
             <p className="text-sm sm:text-base font-semibold">
               PRÓTESIS BIÓNICA
             </p>
+            <p className="max-w-xl font-serif text-sm italic leading-relaxed text-white/90 sm:text-base">
+              Soluciones biónicas personalizadas que favorecen el agarre, la
+              precisión y la autonomía en las actividades diarias.
+            </p>
 
-            <div className="mt-4 flex flex-wrap gap-4 justify-center lg:justify-start">
+            <div className="mt-2 flex flex-wrap justify-center gap-4 lg:justify-start">
               <Link
                 href="/servicios/protesis-bionicas"
                 className="rounded-full bg-white text-[#00939e] px-6 py-2 text-sm sm:text-base font-semibold shadow-md hover:bg-transparent hover:text-white border border-white transition-colors"
@@ -63,16 +66,16 @@ export function Services() {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-whatsapp"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="icon icon-tabler icons-tabler-outline icon-tabler-brand-whatsapp"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
                   <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
                 </svg>
-                <span>Contáctanos</span>
+                <span>Chatea con nosotros</span>
               </button>
             </div>
           </div>
@@ -81,7 +84,7 @@ export function Services() {
 
       {/* 2. PRÓTESIS INFERIOR */}
       <div className="w-full bg-[#f7f7f7]">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 px-4 sm:px-10 lg:px-20 xl:px-28 py-12 sm:py-16 lg:py-20">
+        <div className="flex flex-col items-center justify-between gap-5 px-4 py-8 sm:gap-8 sm:px-10 sm:py-12 lg:flex-row lg:px-20 lg:py-16 xl:px-28">
           {/* Texto izquierda */}
           <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left gap-4">
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-wide text-[#00939e]">
@@ -90,8 +93,12 @@ export function Services() {
             <p className="text-sm sm:text-base font-semibold text-[#00939e]">
               RODILLA DE 4 EJES TOTAL KNEE 2000
             </p>
+            <p className="max-w-xl font-serif text-sm italic leading-relaxed text-gray-600 sm:text-base">
+              Diseñamos prótesis de pierna a medida para mejorar la
+              estabilidad, la comodidad y la confianza al caminar.
+            </p>
 
-            <div className="mt-4 flex flex-wrap gap-4 justify-center lg:justify-start">
+            <div className="mt-2 flex flex-wrap justify-center gap-4 lg:justify-start">
               <Link
                 href="/servicios/protesis-de-pierna"
                 className="rounded-full bg-[#00939e] text-white px-6 py-2 text-sm sm:text-base font-semibold shadow-md hover:bg-[#006f7a] transition-colors"
@@ -109,28 +116,28 @@ export function Services() {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-whatsapp"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="icon icon-tabler icons-tabler-outline icon-tabler-brand-whatsapp"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
                   <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
                 </svg>
-                <span>Contáctanos</span>
+                <span>Chatea con nosotros</span>
               </button>
             </div>
           </div>
 
           {/* Imagen derecha */}
-          <div className="relative w-full md:w-1/2 lg:w-1/2 h-72 sm:h-80 lg:h-[420px]">
-            <div className="lg:absolute lg:top-0 lg:left-40 md:inset-x-52 lg:-inset-y-20">
+          <div className="relative h-56 w-full sm:h-72 md:w-1/2 lg:h-[380px] lg:w-1/2">
+            <div className="absolute inset-0">
               <Image
                 src="/img/services/rodillas.png" // cambia por tu ruta real
                 alt="Prótesis inferior con rodilla de 4 ejes"
                 fill
-                className="object-contain object-left"
+                className="object-contain object-center"
               />
             </div>
           </div>
@@ -139,12 +146,14 @@ export function Services() {
 
       {/* 3. PRÓTESIS ESTÉTICA */}
       <div className="relative w-full bg-white overflow-hidden">
-        <div className="relative z-10 flex flex-col items-center text-center px-4 sm:px-10 lg:px-20 xl:px-28 py-12 sm:py-16 lg:py-20">
+        <div className="relative z-10 flex flex-col items-center px-4 py-8 text-center sm:px-10 sm:py-12 lg:px-20 lg:py-16 xl:px-28">
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-wide text-[#00939e] mb-2">
             PRÓTESIS ESTÉTICA
           </h3>
-          <p className="text-sm sm:text-base text-gray-700 mb-6">
-            Nuestras prótesis estéticas cuentan con un enmallado interno.
+          <p className="mb-6 max-w-xl font-serif text-sm italic leading-relaxed text-gray-600 sm:text-base">
+            Nuestras prótesis estéticas combinan un enmallado interno con
+            acabados personalizados para lograr mayor naturalidad y
+            comodidad.
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center mb-10">
@@ -165,21 +174,21 @@ export function Services() {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="icon icon-tabler icons-tabler-outline icon-tabler-brand-whatsapp"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="icon icon-tabler icons-tabler-outline icon-tabler-brand-whatsapp"
               >
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
                 <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
               </svg>
-              <span>Contáctanos</span>
+              <span>Chatea con nosotros</span>
             </button>
           </div>
 
           {/* Imagen central */}
-          <div className="relative w-full max-w-md h-56 sm:h-64 lg:h-72 mb-8">
+          <div className="relative mb-6 h-48 w-full max-w-md sm:h-56 lg:h-64">
             <Image
               src="/img/services/mano.png" // cambia por tu ruta real
               alt="Prótesis estética de mano y oreja"
@@ -189,16 +198,16 @@ export function Services() {
           </div>
 
           {/* Texto inferior */}
-          <div className="text-[#ffffff] text-center text-xs sm:text-sm font-medium">
-            <p>mayor resistencia, estabilidad y durabilidad</p>
-            <p className="text-[11px] sm:text-xs font-normal">
-              sin perder la naturalidad en el acabado.
+          <div className="rounded-2xl bg-[#007f88] px-6 py-3 text-center font-serif text-sm italic text-white shadow-sm sm:text-base">
+            <p>Mayor resistencia, estabilidad y durabilidad</p>
+            <p className="text-xs font-normal sm:text-sm">
+              sin perder la naturalidad del acabado.
             </p>
           </div>
         </div>
 
         {/* Degradado inferior a TODO el ancho */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent via-[#00939e]/40 to-[#00939e]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-[#00939e]/20" />
       </div>
     </section>
   );

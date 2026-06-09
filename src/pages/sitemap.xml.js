@@ -89,6 +89,7 @@ export async function getServerSideProps({ res }) {
   // Tus URLs fijas (agrega más si quieres)
   const staticEntries = [
     { loc: `${SITE_URL}/`, lastmod: now },
+    { loc: `${SITE_URL}/servicios`, lastmod: now },
     { loc: `${SITE_URL}/servicios/protesis-de-pierna`, lastmod: now },
     { loc: `${SITE_URL}/servicios/protesis-bionicas`, lastmod: now },
     { loc: `${SITE_URL}/servicios/protesis-esteticas`, lastmod: now },

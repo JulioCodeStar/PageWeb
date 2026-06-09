@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Image from "next/image";
 
 export const ProblemSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -8,7 +9,7 @@ export const ProblemSection = () => {
     {
       id: 1,
       title: "FISIOTERAPIA",
-      description: "La fisioterapia es un paciente amoldado de cintura en cuidar el muñón, fortalecer el cuerpo, prevenir deformidades y preservar el uso de las prótesis para que pueda moverse con seguridad e independencia, acompañándolo también en su adaptación física y emocional.",
+      description: "La fisioterapia acompaña al paciente en el cuidado del muñón, el fortalecimiento corporal, la prevención de deformidades y la preparación para usar la prótesis con seguridad e independencia. También brinda apoyo durante su adaptación física y emocional.",
       image: "/img/aqs.png"
     },
     {
@@ -47,12 +48,12 @@ export const ProblemSection = () => {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 pt-8 sm:pt-12 lg:pt-16 xl:pt-20">
-        <div className="mx-auto max-w-8xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24 pb-8 sm:pb-12">
+      <section className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 pt-8 sm:pt-10 lg:pt-12">
+        <div className="mx-auto max-w-8xl px-4 pb-8 sm:px-6 md:px-8 lg:px-12">
           {/* Header */}
-          <div className="mb-8 sm:mb-10 md:mb-12 lg:mb-16 text-center">
+          <div className="mb-6 text-center sm:mb-8 lg:mb-10">
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-extrabold leading-tight tracking-tight text-[#00939e] max-w-7xl mx-auto mb-4 sm:mb-5 md:mb-6 lg:mb-8 px-4">
-              QUE TIPO DE ATENCIÓN Y PROBLEMA ATENDEMOS
+              ¿QUÉ TIPO DE ATENCIÓN BRINDAMOS?
             </h2>
 
             <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-xl font-medium text-[#00939e] max-w-6xl mx-auto px-4 leading-relaxed">
@@ -68,7 +69,7 @@ export const ProblemSection = () => {
       {/* Slider Container */}
       <div className="relative">
         {/* Slides */}
-        <div className="relative h-[400px] sm:h-[500px] md:h-[550px] lg:h-[600px] xl:h-[660px] overflow-hidden">
+        <div className="relative h-[360px] overflow-hidden sm:h-[420px] md:h-[460px] lg:h-[520px]">
           {slides.map((slide, index) => (
             <div
               key={slide.id}
@@ -78,10 +79,12 @@ export const ProblemSection = () => {
             >
               {/* Background Image */}
               <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-cyan-700">
-                <img
+                <Image
                   src={slide.image}
                   alt={slide.title}
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
                 />
               </div>
 

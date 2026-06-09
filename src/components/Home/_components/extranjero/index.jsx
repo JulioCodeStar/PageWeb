@@ -44,8 +44,11 @@ export function ExtranjeroSection({ data }) {
             className="flex flex-col justify-center space-y-6"
           >
             <div className="space-y-4">
+              <span className="inline-block rounded-full bg-[#00939e]/10 px-4 py-1.5 text-sm font-semibold text-[#007f88]">
+                Atención sin fronteras
+              </span>
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-extrabold leading-tight tracking-tight text-[#00939e] max-w-7xl mx-auto mb-4 sm:mb-5 md:mb-6 lg:mb-8 uppercase">
-                {data.title}
+                Prótesis personalizadas para pacientes internacionales
               </h2>
               <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-xl font-normal text-gray-500 max-w-6xl mx-auto leading-relaxed">
                 {data.description}

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export function HeroSection({ data }) {
   
   return (
-    <section className="relative h-[400px] md:h-[500px] w-full overflow-hidden">
+    <section className="relative h-[300px] w-full overflow-hidden md:h-[380px]">
       {/* Background Image with Parallax */}
       <motion.div 
         initial={{ scale: 1.2 }}
@@ -35,9 +35,8 @@ export function HeroSection({ data }) {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h1 className="mb-6 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-              <span cla
-              ssName="text-transparent bg-clip-text bg-gradient-to-r from-device-400 to-device-600">
+            <h1 className="mb-6 text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
+              <span className="bg-gradient-to-r from-device-300 to-device-500 bg-clip-text text-transparent">
                 {data.job}
               </span>
             </h1>

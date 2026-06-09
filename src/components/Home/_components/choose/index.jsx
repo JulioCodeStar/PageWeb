@@ -36,7 +36,7 @@ export function Choose({ data }) {
 
   return (
     <>
-      <section className="relative w-full overflow-hidden bg-[#00939e] px-4 py-16 sm:py-20 lg:py-24">
+      <section className="relative w-full overflow-hidden bg-[#00939e] px-4 py-12 sm:py-16 lg:py-20">
         {/* Background images */}
         <div
           className="absolute right-0 top-0 hidden h-full w-[calc(50%-224px)] bg-cover bg-center bg-no-repeat lg:block"
@@ -49,7 +49,7 @@ export function Choose({ data }) {
           transition={{ duration: 1 }}
         />
 
-        <div className="mx-8 max-w-8xl">
+        <div className="mx-auto max-w-8xl">
           <motion.div
             ref={mainRef}
             variants={containerVariants}
@@ -60,7 +60,7 @@ export function Choose({ data }) {
             {/* Header */}
             <motion.div
               variants={itemVariants}
-              className="mb-12 text-center lg:text-left"
+              className="mb-8 text-center sm:mb-10 lg:text-left"
             >
               <span className="inline-block rounded-full bg-white/10 px-4 py-1 text-lg text-white backdrop-blur-sm sm:text-xl lg:text-2xl mb-4">
                 {data.span}
@@ -71,7 +71,7 @@ export function Choose({ data }) {
             </motion.div>
 
             {/* Features grid */}
-            <div className="grid gap-8 sm:grid-cols-2">
+            <div className="grid gap-6 sm:grid-cols-2 lg:gap-8">
               {data.List.map((feature) => (
                 <motion.div
                   key={feature.title}
@@ -101,14 +101,14 @@ export function Choose({ data }) {
       </section>
 
       {/* Stats section */}
-      <section className="relative -mt-16 px-4">
+      <section className="relative -mt-10 px-4 sm:-mt-12">
         <div className="mx-auto max-w-8xl">
           <motion.div
             ref={statsRef}
             variants={containerVariants}
             initial="hidden"
             animate={isStatsInView ? "visible" : "hidden"}
-            className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4"
+            className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4"
           >
             {data.Card.map((stat) => (
               <motion.div
@@ -120,7 +120,9 @@ export function Choose({ data }) {
                 <Card className="group h-full overflow-hidden rounded-xl bg-white p-4 text-center shadow-lg transition-all duration-300 hover:shadow-xl sm:p-6">
                   <CardHeader className="pb-2 sm:pb-4">
                     <span className="text-3xl font-bold text-[#00939e] sm:text-4xl lg:text-5xl">
-                      {stat.count}
+                      {stat.title?.toLowerCase().includes("sede")
+                        ? "4"
+                        : stat.count}
                     </span>
                   </CardHeader>
                   <CardFooter className="pt-0">

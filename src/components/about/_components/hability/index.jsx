@@ -2,21 +2,15 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 export function SkillSection({ data }) {
-  const ProgressBar = () => (
-    <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
-      <motion.div
-        className="h-full bg-blue-800 rounded-full"
-        initial={{ width: 0 }}
-        whileInView={{ width: "100%" }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-      />
-    </div>
-  );
+  const proofPoints = [
+    { value: "500+", label: "pacientes atendidos" },
+    { value: "10+", label: "especialistas" },
+    { value: "4", label: "sedes en Perú" },
+  ];
 
   return (
     <section className="bg-gray-50 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           {/* Left Content */}
           <motion.div
@@ -37,7 +31,7 @@ export function SkillSection({ data }) {
             </div>
 
             {/* Skills List */}
-            <div className="w-full space-y-6 sm:space-y-8">
+            <div className="grid w-full gap-4">
               {data.Porcentaje.map((skill, index) => (
                 <motion.div
                   key={skill.title}
@@ -45,17 +39,21 @@ export function SkillSection({ data }) {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="space-y-3"
+                  className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
                 >
-                  <div className="flex justify-between items-center">
-                    <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900">
-                      {skill.title}
-                    </h3>
-                    <span className="text-sm sm:text-base font-medium">
-                      {skill.count}%
+                  <div className="mb-3 flex items-center gap-4">
+                    <span className="min-w-20 text-2xl font-extrabold text-[#00939e] sm:text-3xl">
+                      {proofPoints[index]?.value || "KYP"}
                     </span>
+                    <div>
+                      <h3 className="text-base font-bold text-gray-900 sm:text-lg">
+                        {skill.title}
+                      </h3>
+                      <span className="text-sm font-medium text-[#006f7a]">
+                        {proofPoints[index]?.label || "atención personalizada"}
+                      </span>
+                    </div>
                   </div>
-                  <ProgressBar />
                   <p className="text-sm sm:text-base lg:text-lg text-muted-foreground">
                     {skill.paragraph}
                   </p>

@@ -2,7 +2,12 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PhoneIcon } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { WHATSAPP_URL } from "@/lib/whatsapp";
+import {
+  SALES_PHONE_DISPLAY,
+  SALES_PHONE_URL,
+} from "@/lib/contact";
 
 const WhatsAppButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,33 +19,46 @@ const WhatsAppButton = () => {
             initial={{ opacity: 0, scale: 0.5, y: 50 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.5, y: 50 }}
-            className="bg-white rounded-xl shadow-lg w-[350px] overflow-hidden"
+            className="relative w-[calc(100vw-2rem)] max-w-[350px] overflow-hidden rounded-xl bg-white shadow-lg"
           >
-            <div className="bg-green-500 p-8 text-white">
+            <div className="bg-green-500 p-6 text-white">
               <div className="flex items-center gap-3">
-                <PhoneIcon className="w-6 h-6" />
-                <h3 className="font-medium">Comenzar una conversación</h3>
+                <FaWhatsapp className="h-6 w-6" />
+                <h3 className="font-medium">Chatea con nosotros</h3>
               </div>
               <p className="mt-2 text-sm">
-                ¡Hola! Haz clic en uno de nuestros miembros de abajo para
-                chatear por WhatsApp
+                Escríbenos por WhatsApp o llama directamente a nuestro equipo
+                de ventas.
               </p>
             </div>
-            <div className="px-8 py-4 text-sm text-gray-500">
+            <div className="px-6 py-3 text-sm text-gray-500">
               El equipo suele responder en unos minutos.
             </div>
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 px-8 py-4 hover:bg-gray-50 border-t"
+              className="flex items-center gap-3 border-t px-6 py-4 hover:bg-gray-50"
             >
-              <PhoneIcon className="w-10 h-10 text-green-500" />
+              <FaWhatsapp className="h-9 w-9 text-green-500" />
               <div>
-                <div className="font-medium">Ventas</div>
-                <div className="text-sm text-gray-500">Citas</div>
+                <div className="font-medium">Chatea con nosotros</div>
+                <div className="text-sm text-gray-500">WhatsApp y citas</div>
               </div>
-              <PhoneIcon className="w-5 h-5 text-green-500 ml-auto" />
+              <FaWhatsapp className="ml-auto h-5 w-5 text-green-500" />
+            </a>
+            <a
+              href={SALES_PHONE_URL}
+              className="flex items-center gap-3 border-t px-6 py-4 hover:bg-gray-50"
+            >
+              <PhoneIcon className="h-9 w-9 text-[#00939e]" />
+              <div>
+                <div className="font-medium">Llámanos</div>
+                <div className="text-sm text-gray-500">
+                  {SALES_PHONE_DISPLAY}
+                </div>
+              </div>
+              <PhoneIcon className="ml-auto h-5 w-5 text-[#00939e]" />
             </a>
 
             <button
@@ -69,10 +87,11 @@ const WhatsAppButton = () => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.5 }}
             onClick={() => setIsOpen(true)}
-            className="flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-2xl hover:bg-gray-50"
+            aria-label="Abrir opciones de contacto"
+            className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500 text-white shadow-2xl hover:bg-green-600 sm:h-auto sm:w-auto sm:gap-2 sm:bg-white sm:px-6 sm:py-3 sm:text-gray-900 sm:hover:bg-gray-50"
           >
-            <PhoneIcon className="w-6 h-6 text-green-500" />
-            <span className="text-sm">
+            <FaWhatsapp className="h-7 w-7 sm:h-6 sm:w-6 sm:text-green-500" />
+            <span className="hidden text-sm sm:inline">
               ¿Necesitas ayuda?{" "}
               <span className="text-green-500 font-medium">
                 Chatea con nosotros

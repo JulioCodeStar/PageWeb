@@ -3,13 +3,14 @@ import { motion } from "framer-motion";
 import { ArrowRight, Phone } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from 'next/router';
+import { SALES_PHONE_URL } from "@/lib/contact";
 
 export function Subscription({ data }) {
 
   const path = useRouter();
   
   const handleCallNow = () => {
-    window.location.href = "tel:+51922578858";
+    window.location.href = SALES_PHONE_URL;
   };
 
   const enviarWhatsapp = (text) => {

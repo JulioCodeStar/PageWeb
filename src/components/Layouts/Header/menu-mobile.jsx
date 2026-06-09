@@ -64,24 +64,30 @@ function MobileMenu() {
                     transition={{ duration: 0.3 }}
                   >
                     <CollapsibleContent className="space-y-2 px-6 py-2 bg-gray-50 rounded-lg shadow-inner">
+                      <Link
+                        href={item.url}
+                        className="block rounded-lg bg-[#00939e] px-3 py-2 text-sm font-semibold text-white"
+                      >
+                        Ver todos los servicios
+                      </Link>
                       {item.sections.map((section) => (
                         <div key={section.id} className="pt-2">
-                          <a
+                          <Link
                             href={section.slug}
                             className="block py-1 text-gray-600 hover:text-gray-900"
                           >
                             <span className="text-xl">{section.icon}</span>
                             {section.heading}
-                          </a>
+                          </Link>
                           <div className="pl-4 pt-4 space-y-3">
                             {section.links.map((link) => (
-                              <a
+                              <Link
                                 key={link.id}
                                 href={link.url}
                                 className="block text-sm text-gray-700 hover:text-gray-900"
                               >
                                 {link.name}
-                              </a>
+                              </Link>
                             ))}
                           </div>
                         </div>
@@ -90,12 +96,12 @@ function MobileMenu() {
                   </motion.div>
                 </Collapsible>
               ) : (
-                <a
+                <Link
                   href={item.url}
                   className="block px-4 py-2 text-lg font-semibold text-gray-700 hover:bg-gray-100 rounded-lg"
                 >
                   {item.title}
-                </a>
+                </Link>
               )}
             </div>
           ))}

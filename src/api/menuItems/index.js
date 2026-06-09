@@ -16,6 +16,7 @@ export const menuData = {
       __component: "menu.dropdown",
       id: 2,
       title: "Servicios",
+      url: "/servicios",
       sections: [
         {
           id: 3,

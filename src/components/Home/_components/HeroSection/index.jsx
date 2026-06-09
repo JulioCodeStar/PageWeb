@@ -2,9 +2,36 @@
 
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import { openWhatsApp } from "@/lib/whatsapp";
 
 export function HeaderSection({ data }) {
+  const [shouldPlayVideo, setShouldPlayVideo] = useState(false);
+
+  useEffect(() => {
+    const desktopQuery = window.matchMedia("(min-width: 768px)");
+    const reducedMotionQuery = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+
+    const updateVideoPreference = () => {
+      const saveData = navigator.connection?.saveData;
+      setShouldPlayVideo(
+        desktopQuery.matches && !reducedMotionQuery.matches && !saveData,
+      );
+    };
+
+    updateVideoPreference();
+    desktopQuery.addEventListener("change", updateVideoPreference);
+    reducedMotionQuery.addEventListener("change", updateVideoPreference);
+
+    return () => {
+      desktopQuery.removeEventListener("change", updateVideoPreference);
+      reducedMotionQuery.removeEventListener("change", updateVideoPreference);
+    };
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -29,26 +56,38 @@ export function HeaderSection({ data }) {
   };
 
   return (
-    <section className="relative h-[850px] w-full overflow-hidden">
-      {/* Video Background */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="/video/FondoWeb.mp4" type="video/mp4" />
-      </video>
+    <section className="relative h-[460px] w-full overflow-hidden sm:h-[520px] lg:h-[64svh] lg:min-h-[540px] lg:max-h-[640px]">
+      <Image
+        src="/img/hero-poster.jpg"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
+      />
+
+      {shouldPlayVideo && (
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          poster="/img/hero-poster.jpg"
+          className="absolute inset-0 h-full w-full object-cover"
+        >
+          <source src="/video/FondoWeb.mp4" type="video/mp4" />
+        </video>
+      )}
 
       {/* Overlay oscuro para mejor legibilidad */}
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-black/55" />
 
       {/* Contenido Principal Centrado */}
-      <div className="relative flex items-center justify-center h-[800px]">
+      <div className="relative flex h-full items-center justify-center">
         <div className="max-w-4xl px-4 sm:px-6 text-center">
           <motion.div
-            className="space-y-6"
+            className="space-y-4 sm:space-y-5"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
@@ -56,7 +95,7 @@ export function HeaderSection({ data }) {
             {/* Badge */}
             <motion.span
               variants={itemVariants}
-              className="inline-block text-sm font-medium text-white/70 bg-transparent/20 px-4 py-1.5 rounded-full mb-4 sm:mb-4 lg:mb-16"
+              className="inline-block rounded-full bg-black/25 px-4 py-1.5 text-xs font-medium text-white/90 backdrop-blur-sm sm:text-sm"
             >
               {data.span}
             </motion.span>
@@ -64,7 +103,7 @@ export function HeaderSection({ data }) {
             {/* Título Principal */}
             <motion.h1
               variants={itemVariants}
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4 sm:mb-6 text-white/90"
+              className="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl"
             >
               {data.title_1}{" "}
               <span className="block font-medium bg-white/80 bg-clip-text text-transparent">
@@ -75,7 +114,7 @@ export function HeaderSection({ data }) {
             {/* Descripción */}
             <motion.p
               variants={itemVariants}
-              className="text-sm sm:text-base text-white/70 max-w-2xl mb-6 sm:mb-8"
+              className="mx-auto max-w-2xl text-sm leading-relaxed text-white/90 sm:text-base"
             >
               {data.description}
             </motion.p>
@@ -93,17 +132,6 @@ export function HeaderSection({ data }) {
               ))}
             </motion.div>
 
-            {/* Cards - Opcional: si quieres mantener las cards, puedes agregarlas aquí */}
-            <motion.div
-              className="mt-16"
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.8, duration: 0.5 }}
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                {/* Aquí puedes agregar tus cards si lo deseas */}
-              </div>
-            </motion.div>
           </motion.div>
         </div>
       </div>

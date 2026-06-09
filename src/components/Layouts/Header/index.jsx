@@ -3,6 +3,7 @@ import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import MenuItems from "./menu-Items";
 import Image from "next/image";
+import Link from "next/link";
 import MobileMenu from "./menu-mobile";
 import { event as fbEvent } from "@/lib/fpixel";
 import { openWhatsApp } from "@/lib/whatsapp";
@@ -123,7 +124,11 @@ export default function Header() {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <div className="relative z-10 flex items-center gap-4">
-              <div className="relative w-28 md:w-32 aspect-[3/1]">
+              <Link
+                href="/"
+                aria-label="Ir al inicio"
+                className="relative block w-28 md:w-32 aspect-[3/1]"
+              >
                 <Image
                   src="/img/encabezado.png"
                   alt="KYP Bioingeniería"
@@ -132,7 +137,7 @@ export default function Header() {
                   className="object-contain"
                   sizes="(max-width: 768px) 112px, 144px"
                 />
-              </div>
+              </Link>
 
               {/* Navigation */}
               <div className="hidden lg:block">
@@ -154,22 +159,22 @@ export default function Header() {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="40"
-                    height="40"
+                    width="22"
+                    height="22"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-brand-whatsapp"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="icon icon-tabler icons-tabler-outline icon-tabler-brand-whatsapp"
                   >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
                     <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1" />
                   </svg>
                   {/* <Phone className="w-4 h-4" /> */}
-                  <span className="hidden sm:inline">Contáctenos</span>
+                  <span className="hidden sm:inline">Chatea con nosotros</span>
                 </Button>
               </motion.div>
 
