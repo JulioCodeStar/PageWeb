@@ -50,6 +50,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "picsum.dev"
+      },
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com"
       }
     ],
   },

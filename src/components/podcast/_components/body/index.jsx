@@ -27,7 +27,25 @@ const episodes = [
       Una conversación enriquecedora que combina ciencia, experiencia de vida y esperanza 🙌`,
     thumbnail: "/img/podcast/eps.3.jpg",
     youtubeUrl: "https://www.youtube.com/watch?v=ikw4oByXMYM",
-  }
+  },
+  {
+    id: 4,
+    title:
+      "Episodio 4: HISTORIA MOTIVADORA, EL TERRORISMO NO LE QUITÓ LAS GANAS DE VIVIR | KYP BIOINGENIERÍA",
+    description:
+      `En este cuarto episodio, Vanessa Quiroga nos comparte su historia tras perder su pierna en un atentado con coche bomba perpetrado por Sendero Luminoso en Lima, Perú, el 16 de julio de 1992.\n\nNos cuenta cómo fue su adaptación a una prótesis de pierna y cómo retomó su día a día con confianza y determinación. Una historia auténtica, emotiva y con un poderoso mensaje de superación y resiliencia 🙌`,
+    thumbnail: "https://i.ytimg.com/vi/y7s0aZl04rQ/maxresdefault.jpg",
+    youtubeUrl: "https://www.youtube.com/watch?v=y7s0aZl04rQ",
+  },
+  {
+    id: 5,
+    title:
+      "Episodio 5: SISTEMA REVOFIT, EL AJUSTE PERFECTO EN SU PRÓTESIS DE PIERNA | KYP BIOINGENIERÍA",
+    description:
+      `En este episodio, Víctor nos comparte cómo ha sido su proceso de adaptación con una prótesis que incorpora el nuevo sistema RevoFit de Click Medical.\n\nDesde su experiencia personal, habla con honestidad sobre su adaptación, los retos que atravesó y cómo ha recuperado su independencia paso a paso. Una conversación que combina ciencia, experiencia de vida y esperanza 🙌`,
+    thumbnail: "https://i.ytimg.com/vi/oJSlI-z_THI/maxresdefault.jpg",
+    youtubeUrl: "https://www.youtube.com/watch?v=oJSlI-z_THI",
+  },
 ];
 
 export function BodySection() {
