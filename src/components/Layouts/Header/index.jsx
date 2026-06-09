@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import MenuItems from "./menu-Items";
 import Image from "next/image";
 import MobileMenu from "./menu-mobile";
-import { fbEvent } from "@/lib/fpixel";
+import { event as fbEvent } from "@/lib/fpixel";
+import { openWhatsApp } from "@/lib/whatsapp";
 
 export default function Header() {
   const [isFixed, setIsFixed] = useState(false);
@@ -81,19 +82,14 @@ export default function Header() {
     tap: { scale: 0.95 },
   };
 
-  const enviarWhatsapp = (text) => {
-    // 🔹 1. Disparar evento al Pixel
+  const enviarWhatsapp = () => {
     fbEvent("Lead", {
-      content_name: text, // ej: "Prótesis transfemoral"
-      action: "click_whatsapp", // etiqueta interna para ti
-      channel: "web_kyp", // opcional
+      content_name: "Prótesis inferior",
+      action: "click_whatsapp",
+      channel: "web_kyp",
     });
 
-    // 🔹 2. Abrir WhatsApp como ya lo tienes
-    const numero = "51922578858";
-    const mensaje = `👋Hola, estoy interesado *${text}*🛍️. ¿Podrías darme más detalles?🤔`;
-    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
-    window.open(url, "_blank");
+    openWhatsApp();
   };
 
   return (
@@ -153,7 +149,7 @@ export default function Header() {
                 whileTap="tap"
               >
                 <Button
-                  onClick={() => enviarWhatsapp("(escriba el servicio)")}
+                  onClick={enviarWhatsapp}
                   className="bg-[#00939e] hover:bg-[#006f7a] text-white px-4 py-6 rounded-xl flex items-center gap-2"
                 >
                   <svg

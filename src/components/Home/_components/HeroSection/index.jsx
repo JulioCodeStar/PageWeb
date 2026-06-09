@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { openWhatsApp } from "@/lib/whatsapp";
 
 export function HeaderSection({ data }) {
   const containerVariants = {
@@ -25,13 +26,6 @@ export function HeaderSection({ data }) {
         ease: "easeOut",
       },
     },
-  };
-
-  const enviarWhatsapp = (text) => {
-    const numero = "51922578858";
-    const mensaje = `👋Hola, estoy interesado *${text}*🛍️. ¿Podrías darme más detalles?🤔`;
-    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
-    window.open(url, "_blank");
   };
 
   return (
@@ -90,7 +84,7 @@ export function HeaderSection({ data }) {
             <motion.div variants={itemVariants}>
               {data.Button.map((buttontext) => (
                 <Button
-                  onClick={() => enviarWhatsapp("(Escriba el Servicio)")}
+                  onClick={openWhatsApp}
                   key={buttontext.id}
                   className="bg-device-600 hover:bg-device-700 text-white px-6 py-4 sm:py-6 rounded-xl w-64 lg:w-auto"
                 >

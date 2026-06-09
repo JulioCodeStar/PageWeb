@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PhoneIcon } from "lucide-react";
+import { WHATSAPP_URL } from "@/lib/whatsapp";
 
 const WhatsAppButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +30,7 @@ const WhatsAppButton = () => {
               El equipo suele responder en unos minutos.
             </div>
             <a
-              href="https://wa.me/51922578858" // Reemplaza con tu número
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 px-8 py-4 hover:bg-gray-50 border-t"
