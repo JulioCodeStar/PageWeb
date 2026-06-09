@@ -1,15 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { openWhatsApp } from "@/lib/whatsapp";
 
 export function Services() {
-
-  const enviarWhatsapp = (text) => {
-    const numero = "51922578858";
-    const mensaje = `👋Hola, estoy interesado *${text}*🛍️. ¿Podrías darme más detalles?🤔`;
-    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
-    window.open(url, "_blank");
-  };
-
   return (
     <section className="w-full bg-white overflow-hidden">
       {/* Título general */}
@@ -56,7 +49,7 @@ export function Services() {
                 Más información
               </Link>
               <button
-                onClick={() => enviarWhatsapp('Prótesis superior')}
+                onClick={openWhatsApp}
                 className="rounded-full border border-white px-6 py-2 text-sm sm:text-base font-semibold flex items-center gap-2 hover:bg-white hover:text-[#00939e] transition-colors"
               >
                 <svg
@@ -106,7 +99,7 @@ export function Services() {
                 Más información
               </Link>
               <button
-                onClick={() => enviarWhatsapp('Prótesis inferior')}
+                onClick={openWhatsApp}
                 className="rounded-full border border-[#00939e] px-6 py-2 text-sm sm:text-base font-semibold flex items-center gap-2 text-[#00939e] hover:bg-[#00939e] hover:text-white transition-colors"
               >
                 <svg
@@ -164,7 +157,7 @@ export function Services() {
               Más información
             </Link>
             <button
-              onClick={() => enviarWhatsapp('Prótesis estética')}
+              onClick={openWhatsApp}
               className="rounded-full border border-[#00939e] px-6 py-2 text-sm sm:text-base font-semibold flex items-center gap-2 text-[#00939e] hover:bg-[#00939e] hover:text-white transition-colors"
             >
               <svg

@@ -16,6 +16,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Loader2, Send, CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -46,11 +47,10 @@ export function Formulario() {
   const onSubmit = async (data) => {
     setIsSubmitting(true);
     try {
-      const numero = '51922578858';
       const whatsappMessage = `Hola, mi nombre es *${data.name}*. Mi número es *${data.phone}*. Mensaje: ${data.message}`;
-      const whatsappURL = `https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(whatsappMessage)}`;
+      const whatsappURL = getWhatsAppUrl(whatsappMessage);
       
-      window.open(whatsappURL, "_blank");
+      window.open(whatsappURL, "_blank", "noopener,noreferrer");
       
       setIsSuccess(true);
       form.reset();

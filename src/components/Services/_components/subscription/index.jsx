@@ -2,22 +2,12 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ArrowRight, Phone } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from 'next/router';
 import { SALES_PHONE_URL } from "@/lib/contact";
+import { openWhatsApp } from "@/lib/whatsapp";
 
 export function Subscription({ data }) {
-
-  const path = useRouter();
-  
   const handleCallNow = () => {
     window.location.href = SALES_PHONE_URL;
-  };
-
-  const enviarWhatsapp = (text) => {
-    const numero = "51922578858";
-    const mensaje = `👋Hola, estoy interesado *${text}*🛍️. ¿Podrías darme más detalles?🤔`;
-    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
-    window.open(url, "_blank");
   };
 
 
@@ -107,7 +97,7 @@ export function Subscription({ data }) {
                     <Phone className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                   </Button>
                   <Button 
-                    onClick={() => enviarWhatsapp(path.query.slug)}
+                    onClick={openWhatsApp}
                     variant="outline"
                     size="lg"
                     className="w-full py-4 sm:py-6 rounded-xl text-sm sm:text-base lg:text-lg font-medium"
